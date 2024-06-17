@@ -16,10 +16,16 @@ public class InsuranceBenefit {
     private LocalDate acquireDate;
     private LocalDate lossDate;
 
-    private double longTermCareInsurancePremium;  // 장기요양보험료
-    private LocalDate createDate;  // 가입일
+    private double healthInsurancePremium;  // 건강보험료
+    private long longTermCareInsurancePremium;  // 장기요양보험료
+    private long insuranceFee;  // 보험료
+    private double salary;  // 급여
+
     private Payment payment;  // (임시)  납부 가능한 방법
     private String paymentSource;
+    private boolean isPaid;
+
+    private LocalDate createDate;  // 월
 
     private InsuranceBenefit() {}
     public InsuranceBenefit(General general, LocalDate acquireDate, LocalDate lossDate) {
@@ -28,6 +34,11 @@ public class InsuranceBenefit {
         this.acquireDate = acquireDate;
         this.lossDate = lossDate;
         createDate = acquireDate;
+        this.salary = general.getSalary();
+        this.insuranceFee = general.getInsuranceFee();
+        this.healthInsurancePremium = this.salary * (7.09 / 100) / 2;
+        this.longTermCareInsurancePremium = (long) (healthInsurancePremium * (0.9182 / 100 * 7.09 / 100));
+        this.isPaid = false;
     }
 
     // 1인 직장 보험료 출력
@@ -37,40 +48,32 @@ public class InsuranceBenefit {
             System.out.print(general.getWorkInfo().getBname() + "\\t");
             System.out.print(acquireDate + "\\t");
             System.out.print(lossDate + "\\t");
-            System.out.println(calculateHealthInsurance(general.getSalary()));
+            System.out.println(this.insuranceFee);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public double calculateHealthInsurance(double monthlySalary) {
-        double healthInsurancePremium = monthlySalary * (7.09 / 100) / 2; // 1. 건강
-        double longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100); // 2. 장기
-        return healthInsurancePremium + longTermCareInsurancePremium; // 납부금액
-    }
     // 지역 보험료 출력1인
     public void showLocalInsurance() {
-        double healthInsurancePremium = 0;
         System.out.println("구분\t");
         // 년.월 추가
         printYearMonthRange(acquireDate, lossDate);
 
         System.out.println("합계\t");
         try {
-            System.out.println(calculateHealthInsurance(general.getSalary()));
+            System.out.println(this.insuranceFee + "\t");
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             System.out.println("건강\t");
-            healthInsurancePremium = general.getSalary() * (7.09 / 100) * (50 / 100);
-            System.out.println(healthInsurancePremium + "\t");
+            System.out.println(this.healthInsurancePremium + "\t");
         } catch (Exception e) {
             e.printStackTrace();
         }
         try {
             System.out.println("장기요양\t");
-            this.longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100);
             System.out.println(this.longTermCareInsurancePremium + "\t");
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +87,7 @@ public class InsuranceBenefit {
 
         while(!current.isAfter(end)) {
             System.out.print(current.format(formatter) + "\t");
-            current = current.plus(1, ChronoUnit.MONTHS);
+            current = current.plusMonths(1);
         }
         System.out.println();
     }
@@ -101,11 +104,17 @@ public class InsuranceBenefit {
         this.paymentSource = paymentSource;
     }
 
-    public void showInsuranceBenefit() {
-        if (!this.general.getWorkInfo().getIsPaid()) {
-            System.out.println("|" + this.id + "\t" + "미납" + "\t" + general.getName() + "\t" + general.getInsuranceFee() + "\t" + longTermCareInsurancePremium);
+    public void setIsPaid(boolean isPaid) {
+        this.isPaid = isPaid;
+    }
+
+    public void showInsuranceBenefit(int idx) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+        String formattedDate = this.createDate.format(formatter);
+        if (!this.isPaid) {
+            System.out.println("|" + idx + "\t" + "미납" + "\t\t" + general.getName() + "\t" + this.insuranceFee + "원\t\t" + this.longTermCareInsurancePremium + "원\t\t\t" + formattedDate + "\t|");
             return;
         }
-        System.out.println("|" + this.id + "\t" + "납부" + "\t" + general.getName() + "\t" + general.getInsuranceFee() + "\t" + longTermCareInsurancePremium);
+        System.out.println("|" + idx + "\t" + "납부완료" + "\t" + general.getName() + "\t" + this.insuranceFee + "원\t\t" + this.longTermCareInsurancePremium + "원\t\t\t" + formattedDate + "\t|");
     }
 }

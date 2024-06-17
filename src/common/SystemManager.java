@@ -70,6 +70,9 @@ public class SystemManager {
             .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber))
             .findFirst()
             .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));
+        if (this.loggedInUser instanceof Admin) {
+            throw new Exception("관리자는 일반 사용자로 로그인할 수 없습니다.");
+        }
         System.out.println("로그인이 완료되었습니다.");
     }
 
