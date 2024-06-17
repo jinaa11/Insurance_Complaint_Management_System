@@ -1,139 +1,111 @@
-import business.BusinessManager;
+import business.Business;
 import common.Payment;
-import general.InsuranceMangement;
-import general.QualificationManager;
+import common.SystemManager;
+import data.BaseData;
+import isuranceBenefit.ItemCode;
+import isuranceBenefit.MedicalDevice;
+import medicaltreatment.DiseaseCode;
+import user.Admin;
+import user.General;
+import user.User;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.util.*;
+
+import static data.BaseData.genenrateMedicalDevices;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        BusinessManager bm = new BusinessManager();
 
-        // 자격 관리 객체 생성
-        QualificationManager qualificationManager = new QualificationManager();
-        // 보험료 관리 객체 생성
-        InsuranceMangement insuranceMangement = new InsuranceMangement();
+    private static final BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-        while(true) {
-            System.out.println("1.직원 등록");
-            System.out.println("2.직원 목록 조회");
-            System.out.println("3.직원 삭제");
-            System.out.println("4.결제 수단 변경");
-            System.out.println("5.보험료 납부 현황 조회");
-            System.out.println("6.보험료 납부");
-            System.out.println("---------------------------------");
-            System.out.println("\n** 자격 관리 시스템 **");
-            System.out.println("7. 일반 사용자 추가");
-            System.out.println("8. 일반 사용자 자격 확인서 출력");
-            System.out.println("9. 일반 사용자 자격 득실 확인서 출력");
-            System.out.println("10. 일반 사용자 검색");
-            System.out.println("11. 일반 사용자 관계 업데이트");
-            System.out.println("12. 일반 사용자 삭제");
-            System.out.println("13. 프로그램 종료");
-
-            System.out.print("메뉴를 선택하세요: ");
-            String menu = sc.nextLine();
-
-            switch (menu) {
-                case "1":
-//                    bm.addEmployee();
-                    break;
-                case "2":
-                    bm.showEmployees();
-                    System.out.println();
-                    break;
-                case "3":
-                    try {
-                        bm.deleteEmployee();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case "4":
-                    bm.changePayment();
-                    break;
-                case "5":
-                    try {
-                        bm.showPaidInsurance();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case "6":
-                    try {
-                        bm.payInsurance();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
-                case "7":
-//                    qualificationManagement.addGeneral();
-                    break;
-                case "8":
-                    qualificationManager.showQualificationConfirmation();
-                    break;
-                case "9":
-                    qualificationManager.showQualificationConfirmationDetail();
-                    break;
-                case "10":
-                    qualificationManager.searchGeneral();
-                    break;
-                case "11":
-//                    qualificationManagement.updateGeneral();
-                    break;
-                case "12":
-//                    qualificationManagement.deleteGeneral();
-                    break;
-                case "13":
-                    Payment selectedPayment;
-                    int paymentMethod = 1;
-
-                    switch (paymentMethod) {
-                        case 1:
-                            selectedPayment = Payment.CARD;
-                            break;
-                        case 2:
-                            selectedPayment = Payment.ACCOUNT;
-                            break;
-                        default:
-                            System.out.println("지원하지 않는 결제 방법입니다.");
-                            return;
-                    }
-
-                    insuranceMangement.defaultPay(selectedPayment);
-                    break;
-                case "14":
-                    insuranceMangement.autoPay();
-                    break;
-                case "15":
-                    insuranceMangement.anotherPersonPay();
-                    break;
-                case "16":
-                    insuranceMangement.calcaulateHealthInsurance(sc.nextDouble());
-                    break;
-                case "17":
-                    insuranceMangement.insurancePremiumNotice();
-                    break;
-                case "18":
-                    insuranceMangement.getWorkInsurance(sc.nextLine());
-                    break;
-                case "19":
-//                    insuranceMangement.getDetailWorkInsurance(sc.nextDouble());
-                    break;
-                case "20":
-                    insuranceMangement.getLocalInsuranceNoticeAndPaymentStatus(sc.nextLong());
-                    break;
-                case "21":
-                    insuranceMangement.getLocalInsurance();
-                case "22":
-                    System.out.println("프로그램 종료");
-                    return;
-                default:
-                    System.out.println("잘못된 메뉴 번호입니다. 다시 입력해주세요.");
-                    break;
-            }
+    public static void main(String[] args) throws IOException {
+        BaseData baseData = new BaseData();
+        SystemManager systemManager = SystemManager.getInstance();
+        baseData.generateGeneralInitDate(systemManager);
+        String name = "김현민";
+        String phoneNumber = "010-1111-2222";
+        try {
+            systemManager.login(name, phoneNumber);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
+        baseData.generateInsuranceBenefits(systemManager);
+        baseData.generateQualifications(systemManager);
+
+//        systemManager.getQualificationManager().showCertificateOfQualification((General) systemManager.getLoggedInUser());
+//        systemManager.getQualificationManager().showCertificateOfQualificationDetail((General) systemManager.getLoggedInUser());
+//        systemManager.getQualificationManager().showCertificateOfQualification((General) systemManager.getLoggedInUser());
+
+//        systemManager.getInsuranceManager().showWorkInsurance((General) systemManager.getLoggedInUser());
+        systemManager.getInsuranceManager().showLocalInsurance(LocalDate.of(2022, 1, 1), LocalDate.of(2022, 8, 31), (General) systemManager.getLoggedInUser());
+        systemManager.getInsuranceManager().showDetailWorkInsurance((General) systemManager.getLoggedInUser());
+//        while (true) {
+//            try {
+//                if (systemManager.getLoggedInUser() instanceof General) {
+//                    generalScreenLogic();
+//                } else if (systemManager.getLoggedInUser() instanceof Admin) {
+//                    Admin admin = (Admin) systemManager.getLoggedInUser();
+//                    admin.adminScreenLogic(systemManager, bf);
+//                } else if (systemManager.getLoggedInUser() instanceof Business) {
+//
+//                } else {
+//                    welcomeScreenLogic(systemManager);
+//                }
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//        }
+//        testMedicalTreatment(systemManager, general);
+    }
+
+    private static void welcomeScreenLogic(SystemManager manager) throws Exception {
+        System.out.println("========================================");
+        System.out.println("\t\t현수진 건강보험 민원 시스템");
+        System.out.println("========================================");
+        System.out.println("\t1. 로그인");
+        System.out.println("\t2. 관리자 로그인");
+        System.out.println("\t3. 시스템 종료");
+        System.out.println("========================================");
+        System.out.print("[번호 입력]: ");
+        String menu = bf.readLine();
+
+        switch (menu) {
+            case "1":
+                System.out.print("이름: ");
+                String name = bf.readLine();
+                System.out.print("번호: ");
+                String phoneNumber = bf.readLine();
+                manager.login(name, phoneNumber);
+                break;
+            case "2":
+                System.out.print("이름: ");
+                String adminName = bf.readLine();
+                System.out.print("번호: ");
+                String adminPhoneNumber = bf.readLine();
+                System.out.print("비밀번호: ");
+                String password = bf.readLine();
+                manager.login(adminName, adminPhoneNumber, password);
+                break;
+            case "3":
+                System.out.println("\n 시스템을 종료합니다. 이용해주셔서 감사합니다.");
+                System.exit(0);
+        }
+    }
+
+    private static void generalScreenLogic() {
+        System.out.println("========================================");
+        System.out.println("\t\t현수진 건강보험 민원 시스템");
+        System.out.println("========================================\n");
+        System.out.println("\t1. 자격 사항 조회");
+        System.out.println("\t2. 보험료 납부 관리");
+        System.out.println("\t3. 보험료 납부 현황 조회");
+        System.out.println("\t4. 요양비 관련 서비스");
+        System.out.println("\t5. 로그아웃\n");
+        System.out.println("========================================");
+        System.out.print("[번호 입력]: ");
     }
 }

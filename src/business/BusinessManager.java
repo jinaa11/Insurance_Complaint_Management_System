@@ -62,13 +62,6 @@ public class BusinessManager {
       return;
     }
 
-    System.out.print("입사일 (YYYY-MM-DD): ");
-    String hireDate = sc.nextLine().trim();
-    if (!hireDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
-      System.out.println("입사일은 YYYY-MM-DD 형식으로 입력해야 합니다.");
-      return;
-    }
-
     System.out.print("연락처: ");
     String phoneNumber = sc.nextLine().trim();
     if(!phoneNumber.matches("\\d{10,11}")) {
@@ -98,13 +91,11 @@ public class BusinessManager {
       return;
     }
 
-    WorkInfo workInfo = new WorkInfo(LocalDate.parse(hireDate), position);
-    workInfo.setRelationship("직장가입자");
+    WorkInfo workInfo = new WorkInfo(business.getBid(), position, business.getBname());
     // 직원 조회
     List<User> users = manager.getUsers();
     General general = (General) users.stream()
             .filter(user -> user.getName().equals(name) && user.getResidentNumber().equals(residentNumber) && user instanceof General)
-            .filter(user -> ((General) user).getWorkInfo().getCreatedDateTime().equals(LocalDate.parse(hireDate)))
             .filter(user -> user.getPhoneNumber().equals(phoneNumber))
             .findFirst()
             .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));

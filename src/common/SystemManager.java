@@ -1,5 +1,8 @@
 package common;
 
+import general.InsuranceManager;
+import general.Qualification;
+import general.QualificationManager;
 import isuranceBenefit.InsuranceBenefitManager;
 import medicaltreatment.MedicalTreatmentManager;
 import user.Admin;
@@ -14,6 +17,8 @@ public class SystemManager {
     private List<User> users;
     private InsuranceBenefitManager benefitManager;
     private MedicalTreatmentManager treatmentManager;
+    private InsuranceManager insuranceManager;
+    private QualificationManager qualificationManager;
 
     private User loggedInUser;
 
@@ -21,6 +26,8 @@ public class SystemManager {
         users = new ArrayList<>();
         this.benefitManager = InsuranceBenefitManager.getInstance();
         this.treatmentManager = MedicalTreatmentManager.getInstance(benefitManager);
+        this.insuranceManager = InsuranceManager.getInstance();
+        this.qualificationManager = new QualificationManager();
     }
 
     public static SystemManager getInstance() {
@@ -90,5 +97,13 @@ public class SystemManager {
 
     public MedicalTreatmentManager getTreatmentManager() {
         return treatmentManager;
+    }
+
+    public InsuranceManager getInsuranceManager() {
+        return insuranceManager;
+    }
+
+    public QualificationManager getQualificationManager() {
+        return qualificationManager;
     }
 }

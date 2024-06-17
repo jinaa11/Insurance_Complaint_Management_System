@@ -39,7 +39,7 @@ public class General extends User {
     this.workInfo = workInfo;
     this.salary = salary;
     try {
-      double healthInsurancePremium = this.salary * (7.09 / 100) * (50 / 100);
+      double healthInsurancePremium = this.salary * (7.09 / 100) / 2;
       double longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100);
       this.insuranceFee = healthInsurancePremium + longTermCareInsurancePremium;
     } catch (Exception e) {

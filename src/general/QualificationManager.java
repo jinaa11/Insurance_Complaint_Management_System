@@ -1,9 +1,55 @@
 package general;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import user.General;
+
 public class QualificationManager {
+    public static QualificationManager instance;
+
+    List<Qualification> qualifications = new ArrayList<Qualification>();
 
     // 생성자
     public QualificationManager() {}
+
+    // 싱글톤 패턴
+    public QualificationManager getInstance() {
+        if (instance == null) {
+            synchronized (QualificationManager.class) {
+                if (instance == null) {
+                    instance = new QualificationManager();
+                }
+            }
+        }
+        return instance;
+    }
+
+    public void addQualification(Qualification qualification) {
+        qualifications.add(qualification);
+    }
+
+    public void addQualifications(List<Qualification> qualifications) {
+        this.qualifications.addAll(qualifications);
+    }
+
+    //메소드
+    // 자격 사항 요약 확인 전체 조회
+    public void showCertificateOfQualification(General general) {
+        qualifications.stream().filter(q -> q.getGeneral().getInsuranceNumber() == general.getInsuranceNumber()).forEach(Qualification::show);
+    }
+
+    // 자격 상세 확인서 전체 조회
+    public void showCertificateOfQualificationDetail(General general) {
+        qualifications.stream().filter(q -> q.getGeneral().getInsuranceNumber() == general.getInsuranceNumber()).forEach(Qualification::showDetail);
+
+    }
+
+    // 자격 득실 확인 전체 조회
+    public void showCertificateOfEligibilityn(General general) {
+        qualifications.stream().sorted().forEach(q-> q.showRelationShip());
+
+    }
 
     /*public QualificationManagement(String relationship, long bname, String acquireDate, String lossDate) {
         this.relationship = relationship;

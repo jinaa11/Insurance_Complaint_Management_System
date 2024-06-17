@@ -12,7 +12,7 @@ public class InsuranceBenefitManager {
     private static InsuranceBenefitManager instance;
 
     // 관리중인 의료기기 목록
-    private List<MedicalDevice> medicalDevices = new ArrayList<>();
+    private final List<MedicalDevice> medicalDevices = new ArrayList<>();
 
     private InsuranceBenefitManager() {}
     public static InsuranceBenefitManager getInstance() {

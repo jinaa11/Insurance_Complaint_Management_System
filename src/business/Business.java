@@ -8,8 +8,8 @@ public class Business extends User{
 
   public Business() {}
 
-  public Business(String name, String birth, String phoneNumber, String residentNumberlong, long bid, String bname) {
-    super(name, birth, phoneNumber, residentNumberlong);
+  public Business(String name, String birth, String phoneNumber, String residentNumber, long bid, String bname) {
+    super(name, birth, phoneNumber, residentNumber);
     this.bid = bid;
     this.bname = bname;
   }
