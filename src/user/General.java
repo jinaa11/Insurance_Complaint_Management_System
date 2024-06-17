@@ -1,5 +1,7 @@
 package user;
 
+import general.WorkInfo;
+
 public class General extends User {
   // 건강보험증번호
   private long insuranceNumber;
@@ -8,26 +10,31 @@ public class General extends User {
   private boolean isDelete;
   private int insuranceFee;
   private boolean isPaid;
+  private WorkInfo workInfo;  // 직장 번호 (1 대 1)
 
   public General() {}
 
-  public General(String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber, long payerNumber, int insuranceFee) {
-    super(name, birth, phoneNumber, residentNumber);
+  public General(long userId, String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber, long payerNumber, int insuranceFee, WorkInfo workInfo) {
+    super(userId, name, birth, phoneNumber, residentNumber);
     this.insuranceNumber = insuranceNumber;
     this.payerNumber = payerNumber;
     this.isDelete = false;
     this.insuranceFee = insuranceFee;
     this.isPaid = false;
+    this.workInfo = workInfo;
   }
 
   public void show() {
     System.out.println("건강보험증번호: " + insuranceNumber);
     System.out.println("납부자 번호: " + payerNumber);
+    System.out.println("일반 사용자 ID :" + getUserId());
     System.out.println("이름: " + getName());
     System.out.println("생년월일: " + getBirth());
     System.out.println("휴대폰 번호: " + getPhoneNumber());
     System.out.println("주민등록번호: " + getMaskedResidentNumber());
     System.out.println("보험료: " + insuranceFee);
+    System.out.println("일반 사용자 건강보험증번호 :" + insuranceNumber);
+    System.out.println("일반 사용자 납부자 번호 :" + payerNumber);
     System.out.println("납부 여부: " + (isPaid ? "납부" : "미납"));
     System.out.println("삭제 여부: " + isDelete);
   }
@@ -82,6 +89,13 @@ public class General extends User {
 
   public void setInsuranceFee(int insuranceFee) {
     this.insuranceFee = insuranceFee;
+  }
+
+  public WorkInfo getWorkInfo() {
+    return workInfo;
+  }
+  public void setWorkInfo(WorkInfo workInfo) {
+    this.workInfo = workInfo;
   }
 
   @Override
