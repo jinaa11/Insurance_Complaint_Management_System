@@ -1,8 +1,12 @@
 package business;
 
 import common.Payment;
+import common.SystemManager;
+import general.WorkInfo;
 import user.General;
+import user.User;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,7 +38,7 @@ public class BusinessManager {
   }
 
   // 사업장 직원 등록
-  public void addEmployee() {
+  public void addEmployee(SystemManager manager) throws Exception {
     System.out.println("============ 직원 등록 ============");
     System.out.println("직원 정보를 입력하세요.");
 
@@ -86,7 +90,6 @@ public class BusinessManager {
     System.out.println("===============================");
     System.out.println();
 
-
     // 중복 검사
     boolean isDuplicate = employees.stream()
             .anyMatch(employee -> employee.getName().equals(name) && employee.getResidentNumber().equals(residentNumber));
@@ -95,11 +98,19 @@ public class BusinessManager {
       return;
     }
 
-    // 직원 추가
-    General newEmployee = new General(name, birth, phoneNumber, residentNumber, position, 123546L, payerNumber, 0);
-    employees.add(newEmployee);
+    WorkInfo workInfo = new WorkInfo(LocalDate.parse(hireDate), position);
+    workInfo.setRelationship("직장가입자");
+    // 직원 조회
+    List<User> users = manager.getUsers();
+    General general = (General) users.stream()
+            .filter(user -> user.getName().equals(name) && user.getResidentNumber().equals(residentNumber) && user instanceof General)
+            .filter(user -> ((General) user).getWorkInfo().getCreatedDateTime().equals(LocalDate.parse(hireDate)))
+            .filter(user -> user.getPhoneNumber().equals(phoneNumber))
+            .findFirst()
+            .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));
+    general.setWorkInfo(workInfo);
+    employees.add(general);
     System.out.println("직원 등록이 완료되었습니다.");
-    newEmployee.showBusinessEmployees();
   }
 
   // 사업장 직원 삭제
@@ -136,9 +147,7 @@ public class BusinessManager {
     System.out.print("등록할 결제 수단을 입력하세요.(카드/계좌): ");
     String payment = sc.nextLine().trim();
 
-    if(payment.equals(Payment.CARD.getValue())) {
-      System.out.println("결제 수단 등록이 완료되었습니다.: " + payment);
-    } else if(payment.equals(Payment.ACCOUNT.getValue())) {
+    if(Payment.isValidPayment(payment)) {
       System.out.println("결제 수단 등록이 완료되었습니다.: " + payment);
     } else {
       System.out.println("잘못된 결제 수단입니다.");
@@ -169,12 +178,7 @@ public class BusinessManager {
       int num = Integer.parseInt(sc.nextLine());
 
       if (num == 1) {
-        System.out.print("납부할 직원들의 이름을 쉼표(,)로 구분하여 입력하세요: ");
-        String inputNames = sc.nextLine();
-        List<String> names = Arrays.asList(inputNames.split("\\s*,\\s"));
         payInsurance();
-      } else {
-        // 아무 동작도 하지 않음
       }
     }
   }

@@ -11,4 +11,12 @@ public enum Process {
   Process(String value) {
     this.value = value;
   }
+
+  public String getValue() {
+    return this.value;
+  }
+
+  public boolean equals(String value) {
+    return this.value.equals(value);
+  }
 }

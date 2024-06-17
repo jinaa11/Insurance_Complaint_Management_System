@@ -1,40 +1,40 @@
 package general;
 
-import business.BusinessManager;
 import common.Payment;
+import isuranceBenefit.InsuranceBenefit;
 import user.General;
 
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class InsuranceMangement implements Comparable<InsuranceMangement>{
     // 필드
-    private General general;  // (1 대 1)
-    private BusinessManager businessManagerList;  // (1 대 1)
-    private Payment payment;  // (1 대 1)
+    List<InsuranceBenefit> insuranceBenefits;
 
-    Map<Payment, String> payInfo = new HashMap<Payment, String>();
-
-    private double healthInsurance;  // 직장가입자 본인 부담분
-    private double healthInsurancePremium;  // 건강보험료
-    private double longTermCareInsurancePremium;  // 장기요양보험료
-    private String startPaymentPeriod;  // (임시)  납부 기간 시작
-    private String finishPaymentPeriod;  // (임시)  납부 기간 시작
-    private String insurancePremiumType;  // (임시)  보험료 종류
-    private int money;  // (임시) 납부 금액
-    private String paymentDueDate;  // (임시)  납부 마감일
-    private String paymentMethodsAvailable;  // (임시)  납부 가능한 방법
 
     // 생성자
     public InsuranceMangement() {}
 
-    public InsuranceMangement(General general, BusinessManager businessManagerList, Payment payment) {
+    public InsuranceMangement(General general, Payment payment) {
         this.general = general;
-        this.businessManagerList = businessManagerList;
         this.payment = payment;
     }
 
     // 메소드
+    //정규표현식 - 계좌번호
+    private static boolean isValidAccountNumber(String accountNo) {
+        Pattern pattern = Pattern.compile("^\\d{10}$");
+        return pattern.matcher(accountNo).matches();
+    }
+    //정규표현식 - 카드 일련 번호
+    private static boolean isValidCardNumber(String cardInfo) {
+        Pattern pattern = Pattern.compile("^\\d{10}$");
+        return pattern.matcher(cardInfo).matches();
+    }
+
     // 일반 보험료 납부
     public void defaultPay(Payment payment) {
         if (payment == null) {
@@ -47,7 +47,11 @@ public class InsuranceMangement implements Comparable<InsuranceMangement>{
             case CARD:
                 System.out.print("카드 일련 번호 : ");
                 String cardInfo = DataInput.sc.nextLine();
-                payInfo.put(payment, cardInfo);
+                if (isValidCardNumber(cardInfo)) {
+                    payInfo.put(payment, cardInfo);
+                } else {
+                    System.out.println("유효하지 않은 카드 일련번호입니다. 다시 입력해주세요.");
+                }
                 break;
             case ACCOUNT:
                 System.out.print("주민 등록 번호 : ");
@@ -56,6 +60,11 @@ public class InsuranceMangement implements Comparable<InsuranceMangement>{
                 String bankName = DataInput.sc.nextLine();
                 System.out.print("계좌 번호 : ");
                 String accountNo = DataInput.sc.nextLine();
+                if (isValidAccountNumber(accountNo)) {
+                    payInfo.put(payment, accountNo);
+                } else {
+                    System.out.println("유효하지 않은 카드 일련번호입니다. 다시 입력해주세요.");
+                }
 
                 String combinedAccountInfo = residentNumber + "," + bankName + "," + accountNo;
                 payInfo.put(payment, combinedAccountInfo);
@@ -66,7 +75,7 @@ public class InsuranceMangement implements Comparable<InsuranceMangement>{
     }
 
     // 자동이체 보험료 납부
-    public void outoPay() {
+    public void autoPay() {
         if (payment == null) {
             throw new IllegalArgumentException("결제 방법을 입력 되지 않았습니다.");
         }
@@ -77,6 +86,11 @@ public class InsuranceMangement implements Comparable<InsuranceMangement>{
         String bankName = DataInput.sc.nextLine();
         System.out.print("계좌 번호 : ");
         String accountNo = DataInput.sc.nextLine();
+        if (isValidAccountNumber(accountNo)) {
+            payInfo.put(payment, accountNo);
+        } else {
+            System.out.println("유효하지 않은 카드 일련번호입니다. 다시 입력해주세요.");
+        }
 
         String combinedAccountInfo = residentNumber + "," + bankName + "," + accountNo;
         payInfo.put(payment, combinedAccountInfo);
@@ -92,8 +106,19 @@ public class InsuranceMangement implements Comparable<InsuranceMangement>{
         String payerNumber = DataInput.sc.nextLine();
         System.out.print("money : ");
         String money = DataInput.sc.nextLine();
+        System.out.print("주민 등록 번호 : ");
+        String residentNumber = DataInput.sc.nextLine();
+        System.out.print("은행 이름 : ");
+        String bankName = DataInput.sc.nextLine();
+        System.out.print("계좌 번호 : ");
+        String accountNo = DataInput.sc.nextLine();
+        if (isValidAccountNumber(accountNo)) {
+            payInfo.put(payment, accountNo);
+        } else {
+            System.out.println("유효하지 않은 카드 일련번호입니다. 다시 입력해주세요.");
+        }
 
-        String combinedAccountInfo = payerNumber + "," + money;
+        String combinedAccountInfo = payerNumber + "," + money + ","+ residentNumber + "," + bankName + "," + accountNo;
         payInfo.put(payment, combinedAccountInfo);
     }
 
@@ -129,13 +154,17 @@ public class InsuranceMangement implements Comparable<InsuranceMangement>{
     }
 
     // 납부 현황 조회
-    public void getDetailWorkInsurance(double monthlySalary) {
-        healthInsurancePremium = monthlySalary * (7.09 / 100) * (50 / 100);
-        System.out.println("건강보험료 : " + healthInsurancePremium);
-        longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100);
-        System.out.println("장기요양 보험료 : " + longTermCareInsurancePremium);
-
-        System.out.println("가입자부담금 : "+ healthInsurance);
+    public void getDetailWorkInsurance(General general) {
+        try {
+            healthInsurancePremium = general.getSalary() * (7.09 / 100) * (50 / 100);
+            System.out.println("건강보험료 : " + healthInsurancePremium);
+            longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100);
+            System.out.println("장기요양 보험료 : " + longTermCareInsurancePremium);
+            general.setInsuranceFee(healthInsurancePremium + longTermCareInsurancePremium);
+            System.out.println("가입자부담금 : "+ general.getInsuranceFee());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     // 지역 보험료 고지

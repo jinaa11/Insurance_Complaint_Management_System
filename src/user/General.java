@@ -7,37 +7,44 @@ public class General extends User {
   private long insuranceNumber;
   // 납부자 번호
   private long payerNumber;
-  private int insuranceFee;
+  private double insuranceFee;
   private boolean isPaid;
   private String position;
-  private String relationship;  // (임시) 관계
+
   private String bname;  // (임시) 사업장명
   private String acquireDate; // (임시) 취득일
   private String lossDate; // (임시) 상실일
   private WorkInfo workInfo;  // 직장 번호 (1 대 1)
+  private Long salary;
 
   public General() {}
 
   // 사업장 생성자
-  public General(String name, String birth, String phoneNumber, String residentNumber, String position, long insuranceNumber, long payerNumber, int insuranceFee) {
+  public General(String name, String birth, String phoneNumber, String residentNumber, String position, long insuranceNumber, long payerNumber) {
     super(name, birth, phoneNumber, residentNumber);
     this.position = position;
     this.insuranceNumber = insuranceNumber;
     this.payerNumber = payerNumber;
-    this.insuranceFee = insuranceFee;
     this.isPaid = false;
   }
 
   // 일반 사용자 생성자
-  public General(String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber, long payerNumber, String relationship, String bname, String acquireDate, String lossDate, WorkInfo workInfo) {
+  public General(String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber, long payerNumber, String bname, String acquireDate, String lossDate, WorkInfo workInfo, Long salary) {
     super(name, birth, phoneNumber, residentNumber);
     this.insuranceNumber = insuranceNumber;
     this.payerNumber = payerNumber;
-    this.relationship = relationship;
     this.bname = bname;
     this.acquireDate = acquireDate;
     this.lossDate = lossDate;
     this.workInfo = workInfo;
+    this.salary = salary;
+    try {
+      double healthInsurancePremium = this.salary * (7.09 / 100) * (50 / 100);
+      double longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100);
+      this.insuranceFee = healthInsurancePremium + longTermCareInsurancePremium;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   public void show() {
@@ -74,6 +81,13 @@ public class General extends User {
     return maskedNumber;
   }
 
+  public Long getSalary() throws Exception {
+    if (this.salary != null)
+      return salary;
+    else
+      throw new Exception("월급내역이 없습니다.");
+  }
+
   public long getInsuranceNumber() {
     return insuranceNumber;
   }
@@ -98,11 +112,11 @@ public class General extends User {
     isPaid = paid;
   }
 
-  public int getInsuranceFee() {
+  public double getInsuranceFee() {
     return insuranceFee;
   }
 
-  public void setInsuranceFee(int insuranceFee) {
+  public void setInsuranceFee(double insuranceFee) {
     this.insuranceFee = insuranceFee;
   }
 
@@ -118,13 +132,6 @@ public class General extends User {
   }
   public void setPosition(String position) {
     this.position = position;
-  }
-
-  public String getRelationship() {
-    return relationship;
-  }
-  public void setRelationship(String relationship) {
-    this.relationship = relationship;
   }
   public String getAcquireDate() {
     return acquireDate;

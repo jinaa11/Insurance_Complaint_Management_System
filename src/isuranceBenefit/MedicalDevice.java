@@ -1,18 +1,18 @@
 package isuranceBenefit;
 
 public class MedicalDevice {
-  private String itemCode;
+  private ItemCode itemCode;
   private String deviceName;
   private long quantity;
 
-  public MedicalDevice() {}
-  public MedicalDevice(String itemCode, String deviceName, long quantity) {
+  private MedicalDevice() {}
+  public MedicalDevice(ItemCode itemCode, String deviceName, long quantity) {
     this.itemCode = itemCode;
     this.deviceName = deviceName;
     this.quantity = quantity;
   }
 
-  public String getItemCode() {
+  public ItemCode getItemCode() {
     return this.itemCode;
   }
 

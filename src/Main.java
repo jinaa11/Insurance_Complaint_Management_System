@@ -1,14 +1,9 @@
 import business.BusinessManager;
 import common.Payment;
 import general.InsuranceMangement;
-import general.QualificationManagement;
+import general.QualificationManager;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-
-import static common.Payment.CARD;
-import static common.Payment.ACCOUNT;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +11,7 @@ public class Main {
         BusinessManager bm = new BusinessManager();
 
         // 자격 관리 객체 생성
-        QualificationManagement qualificationManagement = new QualificationManagement();
+        QualificationManager qualificationManager = new QualificationManager();
         // 보험료 관리 객체 생성
         InsuranceMangement insuranceMangement = new InsuranceMangement();
 
@@ -42,7 +37,7 @@ public class Main {
 
             switch (menu) {
                 case "1":
-                    bm.addEmployee();
+//                    bm.addEmployee();
                     break;
                 case "2":
                     bm.showEmployees();
@@ -73,22 +68,22 @@ public class Main {
                     }
                     break;
                 case "7":
-                    qualificationManagement.addGeneral();
+//                    qualificationManagement.addGeneral();
                     break;
                 case "8":
-                    qualificationManagement.showQualificationConfirmation();
+                    qualificationManager.showQualificationConfirmation();
                     break;
                 case "9":
-                    qualificationManagement.showQualificationConfirmationDetail();
+                    qualificationManager.showQualificationConfirmationDetail();
                     break;
                 case "10":
-                    qualificationManagement.searchGeneral();
+                    qualificationManager.searchGeneral();
                     break;
                 case "11":
-                    qualificationManagement.updateGeneral();
+//                    qualificationManagement.updateGeneral();
                     break;
                 case "12":
-                    qualificationManagement.deleteGeneral();
+//                    qualificationManagement.deleteGeneral();
                     break;
                 case "13":
                     Payment selectedPayment;
@@ -109,7 +104,7 @@ public class Main {
                     insuranceMangement.defaultPay(selectedPayment);
                     break;
                 case "14":
-                    insuranceMangement.outoPay();
+                    insuranceMangement.autoPay();
                     break;
                 case "15":
                     insuranceMangement.anotherPersonPay();
@@ -124,7 +119,7 @@ public class Main {
                     insuranceMangement.getWorkInsurance(sc.nextLine());
                     break;
                 case "19":
-                    insuranceMangement.getDetailWorkInsurance(sc.nextDouble());
+//                    insuranceMangement.getDetailWorkInsurance(sc.nextDouble());
                     break;
                 case "20":
                     insuranceMangement.getLocalInsuranceNoticeAndPaymentStatus(sc.nextLong());

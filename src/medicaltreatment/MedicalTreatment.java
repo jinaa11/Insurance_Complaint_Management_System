@@ -4,6 +4,8 @@ import common.Payment;
 import isuranceBenefit.MedicalDevice;
 import user.General;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class MedicalTreatment {
@@ -17,24 +19,21 @@ public class MedicalTreatment {
     private Payment payment;
     private long amount;
     private String account;
-    private Date rentalDate;
-    private Date returnDate;
-    private Date createDate;
+    private LocalDate rentalDate;
+    private LocalDate returnDate;
+    private LocalDate createDate;
 
     private MedicalTreatment() {}
     public MedicalTreatment(DiseaseCode code, General general) {
         this.id = MT_ID++;
         this.diseaseCode = code;
         this.general = general;
-        this.createDate = new Date();
+        this.process = Process.WAIT;
+        this.createDate = LocalDate.now();
     }
 
     public void updateProcess(Process process) {
         this.process = process;
-    }
-
-    public void setAmount(long amount) {
-        this.amount = amount;
     }
 
     public void setAccount(String account) {
@@ -53,39 +52,55 @@ public class MedicalTreatment {
         return this.amount;
     }
 
-    public String getAccount() {
-        return this.account;
+    public Process getProcess() {
+        return this.process;
     }
 
-    public Date getRentalDate() {
+    public LocalDate getRentalDate() {
         return this.rentalDate;
     }
 
-    public Date getReturnDate() {
+    public LocalDate getReturnDate() {
         return this.returnDate;
     }
 
-    public Date getCreateDate() {
+    public LocalDate getCreateDate() {
         return this.createDate;
     }
 
-    public void updateRentalData(MedicalDevice device, Payment payment, Date rentalDate, Date returnDate) {
+    public void updateRentalData(MedicalDevice device, Payment payment, LocalDate rentalDate, LocalDate returnDate, long amount) {
         this.device = device;
         this.payment = payment;
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
         this.isPaid = true;
         this.process = Process.PROCESS;
+        this.amount = amount;
     }
 
     public void showMedicalTreatment() {
-        System.out.println("|" + this.id + "\t" + this.diseaseCode.getValue() + "\t" +
-            this.general.getResidentNumber() + "\t" + this.general.getName() + "\t" +
-            this.amount + "\t" + this.account + "\t" + this.device.getDeviceName() + "\t" +
-            this.rentalDate + "\t" + this.returnDate + "|");
+        String maskedResidentNumber = getGeneral().getMaskedResidentNumber();
+        String formatAmount = String.format("%,d원", getAmount());
+
+        if (this.process.equals(Process.WAIT) || this.process.equals(Process.UNABLE)) {
+            System.out.println("|" + this.id + "\t" + this.process.getValue() + "\t" + this.diseaseCode.getValue() + "\t" +
+                    maskedResidentNumber + "\t" + this.general.getName() + "\t" +
+                    " "+ "\t" + " " + "\t" + " " + "\t\t\t\t\t\t" +
+                    " " + "\t" + " " + "\t\t\t\t\t\t\t\t\t|");
+            return;
+        }
+        // localdate format yyyy-MM-dd
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String rentalDate = sdf.format(Date.from(this.rentalDate.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant()));
+        String returnDate = sdf.format(Date.from(this.returnDate.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant()));
+
+        System.out.println("|" + this.id + "\t" + this.process.getValue() + "\t" + this.diseaseCode.getValue() + "\t" +
+                maskedResidentNumber + "\t" + this.general.getName() + "\t" +
+                formatAmount + "\t" + this.account + "\t" + this.device.getDeviceName() + "\t\t" +
+                rentalDate + "\t" + returnDate + "\t|");
     }
 
-    public boolean isPeriodOverlap(Date rentalDate, Date returnDate) {
-        return !(this.returnDate.before(rentalDate) || this.rentalDate.after(returnDate));
+    public boolean isPeriodOverlap(LocalDate rentalDate, LocalDate returnDate) {
+        return !(this.returnDate.isBefore(rentalDate) || this.rentalDate.isAfter(returnDate));
     }
 }

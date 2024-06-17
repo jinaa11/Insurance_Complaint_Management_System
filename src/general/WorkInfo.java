@@ -1,29 +1,31 @@
 package general;
 
-import user.User;
-
-import java.util.Date;
+import java.time.LocalDate;
 
 public class WorkInfo {
     // 필드
-    private Date createdDateTime;  // 입사일
+    private LocalDate createdDateTime;  // 입사일
     private String position;  // 직책
     private Boolean isPaid;  // 대납 여부
+    private String relationship;  // (임시) 관계
 
     // 생성자
-    public WorkInfo() {}
-
-    public WorkInfo(Date createdDateTime, String position, Boolean isPaid) {
+    private WorkInfo() {}
+    public WorkInfo(LocalDate createdDateTime, String position) {
         this.createdDateTime = createdDateTime;
         this.position = position;
-        this.isPaid = isPaid;
+        this.isPaid = false;
+    }
+
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
     }
 
     // getter / setter
-    public Date getCreatedDateTime() {
+    public LocalDate getCreatedDateTime() {
         return createdDateTime;
     }
-    public void setCreatedDateTime(Date createdDateTime) {
+    public void setCreatedDateTime(LocalDate createdDateTime) {
         this.createdDateTime = createdDateTime;
     }
     public String getPosition() {

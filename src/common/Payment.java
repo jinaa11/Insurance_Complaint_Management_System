@@ -13,4 +13,8 @@ public enum Payment {
   public String getValue() {
     return this.value;
   }
+
+  public static boolean isValidPayment(String payment) {
+    return payment.equals(CARD.getValue()) || payment.equals(ACCOUNT.getValue());
+  }
 }
