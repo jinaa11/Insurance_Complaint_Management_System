@@ -86,23 +86,28 @@ public class Main {
     }
 
     private static void generalScreenLogic(SystemManager manager) throws IOException {
-        System.out.println("========================================");
-        System.out.println("\t\t현수진 건강보험 민원 시스템");
-        System.out.println("========================================\n");
-        System.out.println("\t1. 자격 사항 조회");
-        System.out.println("\t2. 보험료 납부 관리");
-        System.out.println("\t3. 보험료 납부 현황 조회");
-        System.out.println("\t4. 요양비 관련 서비스");
-        System.out.println("\t5. 로그아웃\n");
-        System.out.println("========================================");
-        System.out.print("[번호 입력]: ");
-        String menu = bf.readLine();
-
-        switch (menu) {
-            case "1":
-                showQualification(manager);
-                break;
+        while (true) {
+            System.out.println("========================================");
+            System.out.println("\t\t현수진 건강보험 민원 시스템");
+            System.out.println("========================================\n");
+            System.out.println("\t1. 자격 사항 조회");
+            System.out.println("\t2. 보험료 납부 관리");
+            System.out.println("\t3. 보험료 납부 현황 조회");
+            System.out.println("\t4. 요양비 관련 서비스");
+            System.out.println("\t5. 로그아웃\n");
+            System.out.println("========================================");
+            System.out.print("[번호 입력]: ");
+            String menu = bf.readLine();
+            switch (menu) {
+                case "1":
+                    showQualification(manager);
+                    break;
+                case "5":
+                    manager.logout();
+                    return;
+            }
         }
+
 
     }
 
@@ -141,8 +146,8 @@ public class Main {
         System.out.println("\t4. 로그아웃\n");
         System.out.println("========================================");
         System.out.print("[번호 입력]: ");
-        String menu = bf.readLine();
 
+        String menu = bf.readLine();
         switch (menu) {
             case "1":
                 System.out.print("조회 시작일 입력(yyyy-MM-dd): ");
@@ -162,27 +167,30 @@ public class Main {
     }
 
     private static void showQualification(SystemManager manager) throws IOException {
-        System.out.println("========================================");
-        System.out.println("현수진 건강보험 민원 시스템-자격 사항 조회");
-        System.out.println("========================================\n");
-        System.out.println("\t1. 자격 사항 요약 확인서 조회");
-        System.out.println("\t2. 자격 사항 상세 확인서 조회");
-        System.out.println("\t3. 자격 득실 확인서");
-        System.out.println("\t5. 로그아웃\n");
-        System.out.println("========================================");
-        System.out.print("[번호 입력]: ");
-        String menu = bf.readLine();
-
-        switch (menu) {
-            case "1":
-                manager.getQualificationManager().showCertificateOfQualification((General) manager.getLoggedInUser());
-                break;
-            case "2":
-                manager.getQualificationManager().showCertificateOfQualificationDetail((General) manager.getLoggedInUser());
-                break;
-            case "3":
-                manager.getQualificationManager().showCertificateOfEligibilityn((General) manager.getLoggedInUser());
-                break;
+        while (true) {
+            System.out.println("========================================");
+            System.out.println("현수진 건강보험 민원 시스템-자격 사항 조회");
+            System.out.println("========================================\n");
+            System.out.println("\t1. 자격 사항 요약 확인서 조회");
+            System.out.println("\t2. 자격 사항 상세 확인서 조회");
+            System.out.println("\t3. 자격 득실 확인서");
+            System.out.println("\t4. 뒤로가기\n");
+            System.out.println("========================================");
+            System.out.print("[번호 입력]: ");
+            String menu = bf.readLine();
+            switch (menu) {
+                case "1":
+                    manager.getQualificationManager().showCertificateOfQualification((General) manager.getLoggedInUser());
+                    break;
+                case "2":
+                    manager.getQualificationManager().showCertificateOfQualificationDetail((General) manager.getLoggedInUser());
+                    break;
+                case "3":
+                    manager.getQualificationManager().showCertificateOfEligibilityn((General) manager.getLoggedInUser());
+                    break;
+                case "4":
+                    return;
+            }
         }
     }
 }
