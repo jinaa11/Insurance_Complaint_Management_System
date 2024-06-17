@@ -2,13 +2,14 @@ package business;
 
 import user.User;
 
-public class Business extends User {
+public class Business extends User{
   private long bid;
   private String bname;
 
   public Business() {}
 
-  public Business(long bid, String bname) {
+  public Business(String name, String birth, String phoneNumber, String residentNumberlong, long bid, String bname) {
+    super(name, birth, phoneNumber, residentNumberlong);
     this.bid = bid;
     this.bname = bname;
   }
@@ -19,7 +20,7 @@ public class Business extends User {
   }
 
   public void searchBusiness(long bid) {
-
+    
   }
 
   public void save(String actionNo, long pid, String relationship, String bname, String acquire, String lossDate) {

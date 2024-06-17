@@ -7,36 +7,59 @@ public class General extends User {
   private long insuranceNumber;
   // 납부자 번호
   private long payerNumber;
-  private boolean isDelete;
   private int insuranceFee;
   private boolean isPaid;
+  private String position;
+  private String relationship;  // (임시) 관계
+  private String bname;  // (임시) 사업장명
+  private String acquireDate; // (임시) 취득일
+  private String lossDate; // (임시) 상실일
   private WorkInfo workInfo;  // 직장 번호 (1 대 1)
 
   public General() {}
 
-  public General(long userId, String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber, long payerNumber, int insuranceFee, WorkInfo workInfo) {
-    super(userId, name, birth, phoneNumber, residentNumber);
+  // 사업장 생성자
+  public General(String name, String birth, String phoneNumber, String residentNumber, String position, long insuranceNumber, long payerNumber, int insuranceFee) {
+    super(name, birth, phoneNumber, residentNumber);
+    this.position = position;
     this.insuranceNumber = insuranceNumber;
     this.payerNumber = payerNumber;
-    this.isDelete = false;
     this.insuranceFee = insuranceFee;
     this.isPaid = false;
+  }
+
+  // 일반 사용자 생성자
+  public General(String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber, long payerNumber, String relationship, String bname, String acquireDate, String lossDate, WorkInfo workInfo) {
+    super(name, birth, phoneNumber, residentNumber);
+    this.insuranceNumber = insuranceNumber;
+    this.payerNumber = payerNumber;
+    this.relationship = relationship;
+    this.bname = bname;
+    this.acquireDate = acquireDate;
+    this.lossDate = lossDate;
     this.workInfo = workInfo;
   }
 
   public void show() {
+    System.out.println("일반 사용자 이름 :" + getName());
+    System.out.println("일반 사용자 생일 :" + getBirth());
+    System.out.println("일반 사용자 전화번호 :" + getPhoneNumber());
+    System.out.println("일반 사용자 주민등록번호 :" + getResidentNumber());
+    System.out.println("일반 사용자 건강보험증번호 :" + insuranceNumber);
+    System.out.println("일반 사용자 납부자 번호 :" + payerNumber);
+  }
+
+  // 사업장 직원 print
+  public void showBusinessEmployees() {
     System.out.println("건강보험증번호: " + insuranceNumber);
     System.out.println("납부자 번호: " + payerNumber);
-    System.out.println("일반 사용자 ID :" + getUserId());
     System.out.println("이름: " + getName());
     System.out.println("생년월일: " + getBirth());
     System.out.println("휴대폰 번호: " + getPhoneNumber());
     System.out.println("주민등록번호: " + getMaskedResidentNumber());
+    System.out.println("직책: " + position);
     System.out.println("보험료: " + insuranceFee);
-    System.out.println("일반 사용자 건강보험증번호 :" + insuranceNumber);
-    System.out.println("일반 사용자 납부자 번호 :" + payerNumber);
     System.out.println("납부 여부: " + (isPaid ? "납부" : "미납"));
-    System.out.println("삭제 여부: " + isDelete);
   }
 
   // 주민등록번호 뒷자리 마스킹 처리
@@ -67,14 +90,6 @@ public class General extends User {
     this.payerNumber = payerNumber;
   }
 
-  public boolean isDelete() {
-    return isDelete;
-  }
-
-  public void setDelete(boolean delete) {
-    isDelete = delete;
-  }
-
   public boolean isPaid() {
     return isPaid;
   }
@@ -96,6 +111,32 @@ public class General extends User {
   }
   public void setWorkInfo(WorkInfo workInfo) {
     this.workInfo = workInfo;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+  public void setPosition(String position) {
+    this.position = position;
+  }
+
+  public String getRelationship() {
+    return relationship;
+  }
+  public void setRelationship(String relationship) {
+    this.relationship = relationship;
+  }
+  public String getAcquireDate() {
+    return acquireDate;
+  }
+  public void setAcquireDate(String acquireDate) {
+    this.acquireDate = acquireDate;
+  }
+  public String getLossDate() {
+    return lossDate;
+  }
+  public void setLossDate(String lossDate) {
+    this.lossDate = lossDate;
   }
 
   @Override
