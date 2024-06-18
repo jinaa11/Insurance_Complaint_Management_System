@@ -132,16 +132,26 @@ public class MedicalTreatmentManager {
 
     public void showCurrentlyBenefitUsers() {
         System.out.println("================================================================");
-        System.out.println("|건강보험증번호\t\t수진자명\t품목코드\t의료기기명\t대여일\t\t반납일\t|");
-        for (MedicalTreatment medicalTreatment : medicalTreatments) {
-            if (medicalTreatment.getProcess().equals(Process.WAIT) || medicalTreatment.getProcess().equals(Process.PROCESS)) {
-                System.out.println(medicalTreatment.getGeneral().getInsuranceNumber() + "\t" +
-                        medicalTreatment.getGeneral().getName() + "\t" +
-                        medicalTreatment.getDevice().getItemCode() + "\t" +
-                        medicalTreatment.getDevice().getDeviceName() + "\t" +
-                        medicalTreatment.getRentalDate() + "\t" + medicalTreatment.getReturnDate());
-            }
-        }
+        System.out.println("|건강보험증번호\t수진자명\t\t  품목코드\t\t의료기기명\t대여일\t   반납일\t|");
+        medicalTreatments.forEach(mt -> {
+            System.out.print(" " + mt.getGeneral().getInsuranceNumber() + "\t\t");
+            System.out.print(" " + mt.getGeneral().getName() + "\t");
+            System.out.print(" " + mt.getDevice().getItemCode() + "\t");
+            System.out.print(" " + mt.getDevice().getDeviceName() + "\t");
+            System.out.print(" " + mt.getCreateDate() + "\t");
+            System.out.println(" " + mt.getReturnDate());
+        });
+        System.out.println();
+
+//        for (MedicalTreatment medicalTreatment : medicalTreatments) {
+//            if (medicalTreatment.getProcess().equals(Process.WAIT) || medicalTreatment.getProcess().equals(Process.PROCESS)) {
+//                System.out.println(medicalTreatment.getGeneral().getInsuranceNumber() + "\t" +
+//                        medicalTreatment.getGeneral().getName() + "\t" +
+//                        medicalTreatment.getDevice().getItemCode() + "\t" +
+//                        medicalTreatment.getDevice().getDeviceName() + "\t" +
+//                        medicalTreatment.getRentalDate() + "\t" + medicalTreatment.getReturnDate());
+//            }
+//        }
     }
 
     /**

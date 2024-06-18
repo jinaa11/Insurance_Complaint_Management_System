@@ -1,0 +1,45 @@
+
+²
+java:S1319"jThe type of "employees" should be an interface such as "List" rather than the implementation "LinkedList".(ë„˜¹úÿÿÿÿ8ºð¤Ÿ‚2J$3ecdc43c-36cb-4de6-aa65-3614e58d8395
+¸
+java:S1319"pThe type of "deleteEmployees" should be an interface such as "List" rather than the implementation "LinkedList".(ë„˜¹úÿÿÿÿ8ºð¤Ÿ‚2J$53941bd5-adaa-44c3-9141-d09afde16315
+~	java:S125"<This block of commented-out lines of code should be removed.(ËŽ³8ºð¤Ÿ‚2J$10773345-d599-4f43-93a5-87b45d073202
+r	java:S106"+Replace this use of System.out by a logger.(›ñ©¿ûÿÿÿÿ8ºð¤Ÿ‚2J$888693db-a9ca-41ac-8245-b2fd37febcd3
+r	java:S106$"+Replace this use of System.out by a logger.(ùÆ‡âýÿÿÿÿ8ºð¤Ÿ‚2J$c44e3a2f-d89f-48c8-9e60-6af65b441e9c
+r	java:S106&"+Replace this use of System.out by a logger.(ìÉ©°þÿÿÿÿ8ºð¤Ÿ‚2J$c175e9b9-1f17-44cf-8a28-8608f70dd812
+r	java:S106)"+Replace this use of System.out by a logger.(©Äßüýÿÿÿÿ8ºð¤Ÿ‚2J$ce14019b-1ed5-44ea-a426-baaa056e42e4
+r	java:S106-"+Replace this use of System.out by a logger.(ƒ›ïîùÿÿÿÿ8ºð¤Ÿ‚2J$037d5585-37bd-4e0f-846c-d50af9ce8957
+r	java:S1060"+Replace this use of System.out by a logger.(§Âö¹úÿÿÿÿ8ºð¤Ÿ‚2J$51f5a589-987a-40b5-a11e-ba5e90968f9b
+r	java:S1063"+Replace this use of System.out by a logger.(¼±“¼ùÿÿÿÿ8ºð¤Ÿ‚2J$306132a9-3675-4e00-b4c2-f4b07a2c9fcc
+m	java:S1066"+Replace this use of System.out by a logger.(Ø•Éþ8ºð¤Ÿ‚2J$8bc8be0e-4a6a-4982-b71e-8a6a9551a18d
+r	java:S106:"+Replace this use of System.out by a logger.(ŸèÙõûÿÿÿÿ8ºð¤Ÿ‚2J$a5541c17-9f0a-4103-9720-8454a03d6369
+m	java:S106="+Replace this use of System.out by a logger.(äØ¥Ø8ºð¤Ÿ‚2J$44f21ce4-5f97-41e7-81c8-792e7ca24cf7
+r	java:S106A"+Replace this use of System.out by a logger.(éô¼ûÿÿÿÿ8ºð¤Ÿ‚2J$0564717a-c555-4495-bcac-d309c4dd907e
+l	java:S106D"+Replace this use of System.out by a logger.(‰‹Ø]8ºð¤Ÿ‚2J$d0666065-2d44-4453-9564-4f5ffe088e17
+m	java:S106H"+Replace this use of System.out by a logger.(”Ÿ·î8ºð¤Ÿ‚2J$195b17e7-321d-4e54-8ea3-c24ebe224756
+l	java:S106K"+Replace this use of System.out by a logger.(¾ý´}8ºð¤Ÿ‚2J$149dd5be-d000-45ea-8250-11b1e31f94a6
+l	java:S106P"+Replace this use of System.out by a logger.(›ÒT8ºð¤Ÿ‚2J$1527077a-7799-4449-a444-ee67219021cc
+r	java:S106X"+Replace this use of System.out by a logger.(¸îçÄüÿÿÿÿ8ºð¤Ÿ‚2J$41bed4b3-9924-4963-ae53-84aa4bf8058c
+m	java:S106_"+Replace this use of System.out by a logger.(¯É‚—8ºð¤Ÿ‚2J$c530765e-4225-48e0-95ed-112bc2f5d264
+r	java:S106a"+Replace this use of System.out by a logger.(Æ¬÷Ýøÿÿÿÿ8ºð¤Ÿ‚2J$077fbf16-23f8-4ffd-96f3-e222609a100c
+m	java:S106m"+Replace this use of System.out by a logger.(àŒ¡ô8Êð¤Ÿ‚2J$0a16d5a0-1e30-4c85-a78b-f81272933815
+r	java:S106t"+Replace this use of System.out by a logger.(Õâê¿ûÿÿÿÿ8Êð¤Ÿ‚2J$c6aef0f9-126a-4feb-9a42-8e59d5534930
+m	java:S106v"+Replace this use of System.out by a logger.(ú·ÂË8Êð¤Ÿ‚2J$863b108f-671b-4a9f-b99d-66b2de3f24f4
+r	java:S106~"+Replace this use of System.out by a logger.(ŽäïØúÿÿÿÿ8Ìð¤Ÿ‚2J$c2ccd21b-c69b-473a-a235-082c13e2b352
+s	java:S106€"+Replace this use of System.out by a logger.(ŽäïØúÿÿÿÿ8Íð¤Ÿ‚2J$c576e065-c49f-48b2-9b37-fbee38729a33
+s	java:S106‚"+Replace this use of System.out by a logger.(ÉÞ×ðýÿÿÿÿ8Íð¤Ÿ‚2J$737e5aec-2732-4104-82f0-54da837fda71
+s	java:S106ˆ"+Replace this use of System.out by a logger.(õ©Åøùÿÿÿÿ8Íð¤Ÿ‚2J$22e8b8fc-3644-4ce6-8293-671199821ce7
+s	java:S106‰"+Replace this use of System.out by a logger.(ù“ýÔûÿÿÿÿ8Íð¤Ÿ‚2J$9d662437-59ca-491a-9a60-540035cb0ebb
+n	java:S106Œ"+Replace this use of System.out by a logger.(•´À˜8Íð¤Ÿ‚2J$57857880-3f7b-45d8-b1a4-a7d889bb0486
+s	java:S106"+Replace this use of System.out by a logger.(ƒ–ÀÉúÿÿÿÿ8Íð¤Ÿ‚2J$08c8860c-fede-4a3c-969c-a92acaf02aa6
+s	java:S106Ž"+Replace this use of System.out by a logger.(´¾Œ¹øÿÿÿÿ8Íð¤Ÿ‚2J$239aecfa-056c-4883-a01b-56ce4dd5edcc
+n	java:S106"+Replace this use of System.out by a logger.(É¸ŒÏ8Íð¤Ÿ‚2J$59d0a8f4-d948-42dc-a289-8420eeca7b71
+s	java:S106"+Replace this use of System.out by a logger.(ýØ±üÿÿÿÿ8Íð¤Ÿ‚2J$cc041131-3f57-4a34-bb2d-0dbd733e378e
+s	java:S106–"+Replace this use of System.out by a logger.(Ýöìêþÿÿÿÿ8Íð¤Ÿ‚2J$b8efcbd8-b615-430f-ade7-3fbe27aa1174
+s	java:S106—"+Replace this use of System.out by a logger.(ÖšÈ„úÿÿÿÿ8Íð¤Ÿ‚2J$8b42843f-0afa-4b4b-951c-4bc062dc7432
+n	java:S106™"+Replace this use of System.out by a logger.(¡øÖ…8Íð¤Ÿ‚2J$62cdaf6e-bfd4-4c63-89f4-d4918e4e410a
+n	java:S106"+Replace this use of System.out by a logger.(š™øô8Íð¤Ÿ‚2J$a0236dea-d846-4c24-a7f7-d85c6ae332d0
+s	java:S106°"+Replace this use of System.out by a logger.(ô§•éþÿÿÿÿ8Íð¤Ÿ‚2J$c23a48fd-2502-40cf-bb00-33eebc825cf9
+M	java:S106³"+Replace this use of System.out by a logger.(Í¹”üÿÿÿÿ8âã¥Ÿ‚2
+o
+java:S1068",Remove this unused "business" private field.(öÂ®Ø8Íð¤Ÿ‚2J$490cd686-b16c-47b0-a402-7674f9258850

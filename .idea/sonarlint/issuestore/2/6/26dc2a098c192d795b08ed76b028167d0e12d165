@@ -1,0 +1,20 @@
+
+`	java:S112~"FDefine and throw a dedicated exception instead of using a generic one.(Ê¾àÙşÿÿÿÿ
+g	java:S112u"FDefine and throw a dedicated exception instead of using a generic one.(”ÉÚ£ûÿÿÿÿ8Ö¥¾Å‚2
+€
+java:S1192L"eDefine a constant instead of duplicating this literal "ìš”ì–‘ë¹„ ëŒ€ìƒìê°€ ì•„ë‹™ë‹ˆë‹¤." 3 times.(ƒøš¥ûÿÿÿÿ
+]	java:S107F"<Method has 8 parameters, which is greater than 7 authorized.(±˜ËØÿÿÿÿÿ8ß¥¾Å‚2
+[
+java:S2168"9Remove this dangerous instance of double-checked locking.(ä¥„»úÿÿÿÿ8å¥¾Å‚2
+L	java:S106,"+Replace this use of System.out by a logger.(ÇÚäØşÿÿÿÿ8æ¥¾Å‚2
+F	java:S106-"+Replace this use of System.out by a logger.(ŠÈ¹>8æ¥¾Å‚2
+?	java:S106."+Replace this use of System.out by a logger.(„¢„
+L	java:S1066"+Replace this use of System.out by a logger.(ÇÚäØşÿÿÿÿ8è¥¾Å‚2
+E	java:S106B"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ
+E	java:S106R"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ
+?	java:S106]"+Replace this use of System.out by a logger.(®ñ»5
+E	java:S106_"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ
+L	java:S106q"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ8÷¥¾Å‚2
+H	java:S106†"+Replace this use of System.out by a logger.(•èîğ8ı¥¾Å‚2
+M	java:S106‡"+Replace this use of System.out by a logger.(çà¼Îùÿÿÿÿ8ı¥¾Å‚2
+H	java:S106Š"+Replace this use of System.out by a logger.(¼ˆÌØ8ş¥¾Å‚2

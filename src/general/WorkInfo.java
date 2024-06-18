@@ -22,4 +22,6 @@ public class WorkInfo {
     public long getBid() {
         return bid;
     }
+
+    public String getPosition() {return position;}
 }
