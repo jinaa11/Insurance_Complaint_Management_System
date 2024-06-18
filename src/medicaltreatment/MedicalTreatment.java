@@ -1,11 +1,13 @@
 package medicaltreatment;
 
 import common.Payment;
+import isuranceBenefit.ItemCode;
 import isuranceBenefit.MedicalDevice;
 import user.General;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class MedicalTreatment {
@@ -18,18 +20,20 @@ public class MedicalTreatment {
     private boolean isPaid = false;
     private Payment payment;
     private long amount;
+    private ItemCode itemCode;
     private String account;
     private LocalDate rentalDate;
     private LocalDate returnDate;
-    private LocalDate createDate;
+    private LocalDateTime createDate;
 
     private MedicalTreatment() {}
-    public MedicalTreatment(DiseaseCode code, General general) {
+    public MedicalTreatment(DiseaseCode code, General general, ItemCode itemCode) {
         this.id = MT_ID++;
         this.diseaseCode = code;
         this.general = general;
         this.process = Process.WAIT;
-        this.createDate = LocalDate.now();
+        this.createDate = LocalDateTime.now();
+        this.itemCode = itemCode;
     }
 
     public void updateProcess(Process process) {
@@ -56,6 +60,10 @@ public class MedicalTreatment {
         return this.process;
     }
 
+    public ItemCode getItemCode() {
+        return this.itemCode;
+    }
+
     public LocalDate getRentalDate() {
         return this.rentalDate;
     }
@@ -64,7 +72,7 @@ public class MedicalTreatment {
         return this.returnDate;
     }
 
-    public LocalDate getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return this.createDate;
     }
 
@@ -86,7 +94,7 @@ public class MedicalTreatment {
             System.out.println("|" + this.id + "\t" + this.process.getValue() + "\t" + this.diseaseCode.getValue() + "\t" +
                     maskedResidentNumber + "\t" + this.general.getName() + "\t" +
                     " "+ "\t" + " " + "\t" + " " + "\t\t\t\t\t\t" +
-                    " " + "\t" + " " + "\t\t\t\t\t\t\t\t\t|");
+                    " " + "\t" + " " + "\t\t\t\t\t\t\t\t\t" + this.createDate + "|");
             return;
         }
         // localdate format yyyy-MM-dd
@@ -97,7 +105,7 @@ public class MedicalTreatment {
         System.out.println("|" + this.id + "\t" + this.process.getValue() + "\t" + this.diseaseCode.getValue() + "\t" +
                 maskedResidentNumber + "\t" + this.general.getName() + "\t" +
                 formatAmount + "\t" + this.account + "\t" + this.device.getDeviceName() + "\t\t" +
-                rentalDate + "\t" + returnDate + "\t|");
+                rentalDate + "\t" + returnDate + "\t" + this.createDate + "|");
     }
 
     public boolean isPeriodOverlap(LocalDate rentalDate, LocalDate returnDate) {

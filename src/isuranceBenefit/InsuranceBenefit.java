@@ -44,10 +44,9 @@ public class InsuranceBenefit {
     // 1인 직장 보험료 출력
     public void showWorkInsurance() {
         try {
-            System.out.print(general.getInsuranceNumber() + "\\t");
-            System.out.print(general.getWorkInfo().getBname() + "\\t");
-            System.out.print(acquireDate + "\\t");
-            System.out.print(lossDate + "\\t");
+            System.out.print(general.getInsuranceNumber() + "\t");
+            System.out.print(general.getWorkInfo().getBname() + "\t");
+            System.out.print(acquireDate + "\t");
             System.out.println(this.insuranceFee);
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,12 +99,36 @@ public class InsuranceBenefit {
         return createDate;
     }
 
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
     public void setPaymentSource(String paymentSource) {
         this.paymentSource = paymentSource;
     }
 
     public void setIsPaid(boolean isPaid) {
         this.isPaid = isPaid;
+    }
+
+    public long getInsuranceFee() {
+        return insuranceFee;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public long getLongTermCareInsurancePremium() {
+        return longTermCareInsurancePremium;
+    }
+
+    public long getHealthInsurancePremium() {
+        return (long) healthInsurancePremium;
+    }
+
+    public String getPaymentSource() {
+        return paymentSource;
     }
 
     public void showInsuranceBenefit(int idx) {

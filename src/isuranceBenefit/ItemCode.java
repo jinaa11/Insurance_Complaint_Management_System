@@ -12,7 +12,19 @@ public enum ItemCode {
         this.value = value;
     }
 
-    public ItemCode getCode(String value) {
+    public static void showValues() {
+        System.out.print("폼목코드 목록: ");
+        ItemCode[] codes = ItemCode.values();
+        for (int i = 0; i < codes.length; i++) {
+            System.out.print(codes[i].value);
+            if (i < codes.length - 1) {
+                System.out.print(", ");  // 마지막 요소가 아니라면 쉼표와 공백을 추가
+            }
+        }
+        System.out.println();  // 모든 요소 출력 후 줄바꿈
+    }
+
+    public static ItemCode getCode(String value) {
         for (ItemCode code : ItemCode.values()) {
             if (code.value.equals(value)) {
                 return code;
