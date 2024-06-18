@@ -1,5 +1,7 @@
 package common;
 
+import business.Business;
+import business.BusinessManager;
 import general.InsuranceManager;
 import general.Qualification;
 import general.QualificationManager;
@@ -19,7 +21,7 @@ public class SystemManager {
     private MedicalTreatmentManager treatmentManager;
     private InsuranceManager insuranceManager;
     private QualificationManager qualificationManager;
-
+    private BusinessManager businessManager;
     private User loggedInUser;
 
     public SystemManager() {
@@ -28,6 +30,7 @@ public class SystemManager {
         this.treatmentManager = MedicalTreatmentManager.getInstance(benefitManager);
         this.insuranceManager = InsuranceManager.getInstance();
         this.qualificationManager = new QualificationManager();
+        this.businessManager = new BusinessManager();
     }
 
     public static SystemManager getInstance() {
@@ -85,12 +88,15 @@ public class SystemManager {
             throw new Exception("비밀번호가 일치하지 않습니다.");
         } else {
             this.loggedInUser = user;
+            if (this.loggedInUser instanceof Business)
+                getBusinessManager().setBusiness((Business) this.loggedInUser);
         }
         System.out.println("로그인이 완료되었습니다.");
     }
 
     public void logout() {
         this.loggedInUser = null;
+        this.getBusinessManager().setBusiness(null);
         System.out.println("로그아웃이 완료되었습니다.");
     }
 
@@ -109,4 +115,5 @@ public class SystemManager {
     public QualificationManager getQualificationManager() {
         return qualificationManager;
     }
+    public BusinessManager getBusinessManager() {return businessManager;}
 }

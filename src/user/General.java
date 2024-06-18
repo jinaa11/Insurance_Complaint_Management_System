@@ -69,7 +69,7 @@ public class General extends User {
     System.out.println("생년월일: " + getBirth());
     System.out.println("휴대폰 번호: " + getPhoneNumber());
     System.out.println("주민등록번호: " + getMaskedResidentNumber());
-    System.out.println("직책: " + position);
+    System.out.println("직책: " + workInfo.getPosition());
     System.out.println("보험료: " + insuranceFee);
     System.out.println("납부 여부: " + (isPaid ? "납부" : "미납"));
   }
@@ -77,13 +77,12 @@ public class General extends User {
   // 주민등록번호 뒷자리 마스킹 처리
   public String getMaskedResidentNumber() {
     String residentNumber = getResidentNumber();
-    if(residentNumber == null || residentNumber.length() != 13) {
+    if(residentNumber == null || residentNumber.length() != 14 || !residentNumber.matches("\\d{6}-\\d{7}")) {
       // 주민등록번호가 null이거나 13자리가 아니면 그대로 반환
       return residentNumber;
     }
 
-    String maskedNumber = residentNumber.substring(0,6) + "-" + residentNumber.substring(6,7) + "******";
-    return maskedNumber;
+    return residentNumber.substring(0, 8) + "******";
   }
 
   public Long getSalary() {
