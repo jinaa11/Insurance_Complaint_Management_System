@@ -1,0 +1,97 @@
+
+7
+java:S1220""Move this file to a named package.8…ÃÂÅ‚2
+D
+java:S2189!""Add an end condition to this loop.(˜ïˆÿÿÿÿÿ8ˆÃÂÅ‚2
+Œ
+java:S11925"jDefine a constant instead of duplicating this literal "========================================" 11 times.(©üÃõüÿÿÿÿ8ÃÂÅ‚2
+o
+java:S1192<"RDefine a constant instead of duplicating this literal "[ë²ˆí˜¸ ì…ë ¥]: " 5 times.(»‰Ï¾8ÃÂÅ‚2
+‡
+java:S1192\"jDefine a constant instead of duplicating this literal "========================================
+" 4 times.(ÛÓòè8ÃÂÅ‚2
+[
+java:S1854'"9Remove this useless assignment to local variable "admin".(©ıêòùÿÿÿÿ8’ÃÂÅ‚2
+L	java:S106"+Replace this use of System.out by a logger.(ªÓ¼áşÿÿÿÿ8 ÃÂÅ‚2
+L
+java:S1481'"*Remove this unused "admin" local variable.(©ıêòùÿÿÿÿ8 ÃÂÅ‚2
+E	java:S108)")Either remove or fill this block of code.(¥İÛè8¡ÃÂÅ‚2
+L	java:S106/"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ8¡ÃÂÅ‚2
+L	java:S1065"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8¡ÃÂÅ‚2
+L	java:S1066"+Replace this use of System.out by a logger.(î›¥Ñúÿÿÿÿ8¡ÃÂÅ‚2
+L	java:S1067"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8¡ÃÂÅ‚2
+L	java:S1068"+Replace this use of System.out by a logger.(ÚÊªÿÿÿÿÿ8¡ÃÂÅ‚2
+L	java:S1069"+Replace this use of System.out by a logger.(®›Üåùÿÿÿÿ8¢ÃÂÅ‚2
+L	java:S106:"+Replace this use of System.out by a logger.(È«¹‰ıÿÿÿÿ8¢ÃÂÅ‚2
+L	java:S106;"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8¢ÃÂÅ‚2
+G	java:S106<"+Replace this use of System.out by a logger.(»‰Ï¾8¢ÃÂÅ‚2
+=	java:S131?""Add a default case to this switch.(€ä¿;8£ÃÂÅ‚2
+L	java:S106A"+Replace this use of System.out by a logger.(›¶Œıÿÿÿÿ8£ÃÂÅ‚2
+L	java:S106B"+Replace this use of System.out by a logger.(ìÉ©°şÿÿÿÿ8£ÃÂÅ‚2
+G	java:S106D"+Replace this use of System.out by a logger.(‚Öü¤8¤ÃÂÅ‚2
+G	java:S106I"+Replace this use of System.out by a logger.(™»Ùï8¤ÃÂÅ‚2
+L	java:S106J"+Replace this use of System.out by a logger.(ìÉ©°şÿÿÿÿ8¤ÃÂÅ‚2
+G	java:S106L"+Replace this use of System.out by a logger.(‚Öü¤8¤ÃÂÅ‚2
+L	java:S106N"+Replace this use of System.out by a logger.(›¿º˜ùÿÿÿÿ8«ÃÂÅ‚2
+G	java:S106S"+Replace this use of System.out by a logger.(™şÙ8«ÃÂÅ‚2
+L	java:S106Z"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8­ÃÂÅ‚2
+L	java:S106["+Replace this use of System.out by a logger.(î›¥Ñúÿÿÿÿ8­ÃÂÅ‚2
+G	java:S106\"+Replace this use of System.out by a logger.(ÛÓòè8­ÃÂÅ‚2
+G	java:S106]"+Replace this use of System.out by a logger.(ä‘¹á8­ÃÂÅ‚2
+G	java:S106^"+Replace this use of System.out by a logger.(ĞÅÀò8­ÃÂÅ‚2
+L	java:S106_"+Replace this use of System.out by a logger.(ùï°ûÿÿÿÿ8­ÃÂÅ‚2
+L	java:S106`"+Replace this use of System.out by a logger.(éËÓİÿÿÿÿÿ8­ÃÂÅ‚2
+L	java:S106a"+Replace this use of System.out by a logger.(Ê°«ùüÿÿÿÿ8®ÃÂÅ‚2
+L	java:S106b"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8®ÃÂÅ‚2
+G	java:S106c"+Replace this use of System.out by a logger.(»‰Ï¾8®ÃÂÅ‚2
+g
+java:S1301e"KReplace this "switch" statement by "if" statements to increase readability.(€ä¿;8®ÃÂÅ‚2
+=	java:S131e""Add a default case to this switch.(€ä¿;8®ÃÂÅ‚2
+L	java:S106s"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8°ÃÂÅ‚2
+L	java:S106t"+Replace this use of System.out by a logger.(…ğ¦Èùÿÿÿÿ8°ÃÂÅ‚2
+G	java:S106u"+Replace this use of System.out by a logger.(ÛÓòè8°ÃÂÅ‚2
+G	java:S106v"+Replace this use of System.out by a logger.(ÈËÛ8±ÃÂÅ‚2
+G	java:S106w"+Replace this use of System.out by a logger.(‹·…ß8±ÃÂÅ‚2
+L	java:S106x"+Replace this use of System.out by a logger.(¤Ïûîøÿÿÿÿ8±ÃÂÅ‚2
+L	java:S106y"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8±ÃÂÅ‚2
+G	java:S106z"+Replace this use of System.out by a logger.(»‰Ï¾8±ÃÂÅ‚2
+=	java:S131}""Add a default case to this switch.(€ä¿;8²ÃÂÅ‚2
+M	java:S106…"+Replace this use of System.out by a logger.(µ êäùÿÿÿÿ8²ÃÂÅ‚2
+M	java:S106Œ"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8´ÃÂÅ‚2
+M	java:S106"+Replace this use of System.out by a logger.(…ğ¦Èùÿÿÿÿ8´ÃÂÅ‚2
+H	java:S106"+Replace this use of System.out by a logger.(ÛÓòè8´ÃÂÅ‚2
+M	java:S106"+Replace this use of System.out by a logger.(Ö‚Ô×üÿÿÿÿ8´ÃÂÅ‚2
+M	java:S106"+Replace this use of System.out by a logger.(ï©œÿÿÿÿÿ8´ÃÂÅ‚2
+H	java:S106‘"+Replace this use of System.out by a logger.( ÀÖ8´ÃÂÅ‚2
+M	java:S106’"+Replace this use of System.out by a logger.(ï³åªúÿÿÿÿ8µÃÂÅ‚2
+M	java:S106“"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8µÃÂÅ‚2
+H	java:S106”"+Replace this use of System.out by a logger.(»‰Ï¾8µÃÂÅ‚2
+>	java:S131—""Add a default case to this switch.(€ä¿;8¶ÃÂÅ‚2
+M	java:S106™"+Replace this use of System.out by a logger.(óéˆ¹ùÿÿÿÿ8¶ÃÂÅ‚2
+G	java:S106›"+Replace this use of System.out by a logger.(ê–¾8¶ÃÂÅ‚2
+M	java:S106¦"+Replace this use of System.out by a logger.(µ êäùÿÿÿÿ8¸ÃÂÅ‚2
+M	java:S106®"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8¹ÃÂÅ‚2
+H	java:S106¯"+Replace this use of System.out by a logger.(½ìÇŠ8¹ÃÂÅ‚2
+H	java:S106°"+Replace this use of System.out by a logger.(ÛÓòè8¹ÃÂÅ‚2
+G	java:S106±"+Replace this use of System.out by a logger.(ÚŸy8¹ÃÂÅ‚2
+M	java:S106²"+Replace this use of System.out by a logger.(º™•üÿÿÿÿ8ºÃÂÅ‚2
+H	java:S106³"+Replace this use of System.out by a logger.(Êúİ·8ºÃÂÅ‚2
+H	java:S106´"+Replace this use of System.out by a logger.(„ù¹İ8ºÃÂÅ‚2
+M	java:S106µ"+Replace this use of System.out by a logger.(©üÃõüÿÿÿÿ8ºÃÂÅ‚2
+H	java:S106¶"+Replace this use of System.out by a logger.(»‰Ï¾8ºÃÂÅ‚2
+>	java:S131¸""Add a default case to this switch.(€ä¿;8»ÃÂÅ‚2
+H
+java:S1128"+Remove this unused import 'common.Payment'.(¨éÚÎ8½ÃÂÅ‚2
+W
+java:S1128"5Remove this unused import 'isuranceBenefit.ItemCode'.(ûúúñıÿÿÿÿ8½ÃÂÅ‚2
+W
+java:S1128":Remove this unused import 'isuranceBenefit.MedicalDevice'.(˜Ççİ8½ÃÂÅ‚2
+[
+java:S1128"9Remove this unused import 'medicaltreatment.DiseaseCode'.(Òİ©éøÿÿÿÿ8½ÃÂÅ‚2
+C
+java:S1128
+"&Remove this unused import 'user.User'.(¥Ï˜Ò8½ÃÂÅ‚2
+C
+java:S1128"&Remove this unused import 'java.util'.(Î€ŒÙ8½ÃÂÅ‚2
+_
+java:S1128"BRemove this unused import 'data.BaseData.genenrateMedicalDevices'.(âÀ×˜8½ÃÂÅ‚2

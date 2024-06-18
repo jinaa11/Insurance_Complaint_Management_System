@@ -1,0 +1,14 @@
+
+•
+java:S1104"TMake instance a static final constant or non-public and provide accessors if needed.(¶è§óùÿÿÿÿJ$b3a6be82-cb25-499e-ad59-00d43872dcc1
+o
+java:S1444".Make this "public static instance" field final(¶è§óùÿÿÿÿJ$1ab0c40e-e10d-48e9-a4a4-71d77f5d9fa8
+	java:S112J"FDefine and throw a dedicated exception instead of using a generic one.(ı’º¥J$a5cf97b2-df2f-4be6-9136-05426733e593
+†	java:S112V"FDefine and throw a dedicated exception instead of using a generic one.(ë§ÍÆşÿÿÿÿJ$df55f852-9ad2-4b0d-8bff-b9ba390745fe
+u
+java:S2168#"9Remove this dangerous instance of double-checked locking.(ÂÎ·ÒJ$2ed84f81-5a53-4e62-967c-538153aae20d
+k	java:S106L"+Replace this use of System.out by a logger.(âÓÜÜøÿÿÿÿJ$69217a53-c828-4c5f-8f45-33bcdb9522ea
+k	java:S106Z"+Replace this use of System.out by a logger.(âÓÜÜøÿÿÿÿJ$a9b7a2ca-2299-429b-b206-d2a9d216a3ee
+f	java:S106_"+Replace this use of System.out by a logger.(¦¾÷ÏJ$dae0a5b6-94bf-42d4-87ad-d17a71a8b5e1
+s
+java:S1128"2Remove this unused import 'general.Qualification'.(²ÁŞÓúÿÿÿÿJ$ba130fbc-8a40-41f0-baea-3aa2c1fa1509
