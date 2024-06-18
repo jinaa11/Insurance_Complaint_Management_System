@@ -23,10 +23,9 @@ public class BusinessManager {
     deleteEmployees = new LinkedList<>();
   }
 
-  public BusinessManager(LinkedList<General> employees, LinkedList<General> deleteEmployees, Business business) {
+  public BusinessManager(LinkedList<General> employees, LinkedList<General> deleteEmployees) {
     this.employees = employees;
     this.deleteEmployees = deleteEmployees;
-    this.business = business;
   }
 
   // 사업장 직원 목록 조회
@@ -35,6 +34,10 @@ public class BusinessManager {
       employee.showBusinessEmployees();
       System.out.println("===============================");
     }
+  }
+
+  public void setBusiness(Business business) {
+    this.business = business;
   }
 
   // 사업장 직원 등록

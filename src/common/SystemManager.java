@@ -78,7 +78,7 @@ public class SystemManager {
 
     public void login(String name, String phoneNumber, String password) throws Exception {
         User user = users.stream()
-                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber))
+                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber) && u instanceof Admin)
                 .findFirst()
                 .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));
         if (user instanceof Admin && !((Admin) user).getPassword().equals(password)) {
