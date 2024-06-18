@@ -23,9 +23,10 @@ public class BaseData {
     public void generateGeneralInitDate(SystemManager manager) {
         List<User> users = List.of(
                 // Admin 객체 생성
-                new Admin("관리자1", "1980-05-01", "010-1234-5678", "850101-1234567", "adminpass123"),
+                new Admin("관리자1", "1980-05-01", "010-1234-5678", "850101-1234567", "admin123"),
                 new Admin("관리자2", "1982-07-15", "010-8765-4321", "820715-7654321", "adminpass456"),
-                new Admin("이수호", "1998-03-03", "010-7720-7850", "980303-7654321", "admin"),
+//                new Admin("이수호", "1998-03-03", "010-7720-7850", "980303-7654321", "admin"),
+                new Admin("1", "1998-03-03", "2", "980303-7654321", "3"),
 
                 // Business 객체 생성
                 // public Business(String name, String birth, String phoneNumber, String residentNumber, long bid, String bname) {
@@ -79,11 +80,12 @@ public class BaseData {
             }
         });
     }
-
+    // 관리자 시스템용
     public void testMedicalTreatment(SystemManager systemManager) {
         General general = (General) systemManager.getUsers().get(9);
         // 더미 의료기기 목록 등록
         List<MedicalDevice> medicalDevices = genenrateMedicalDevices();
+        systemManager.getBenefitManager().addMedicalDevices(medicalDevices);
 
         // 요양비 대상자 등록
         systemManager.getTreatmentManager().insertMedicalTreatment(DiseaseCode.RESPIRATORY_DISEASE, ItemCode.ASSISTIVE_DEVICE, general);
@@ -93,18 +95,13 @@ public class BaseData {
 
         int quantity = 3;
         // 의료기기 대여
-        // 20170408
         LocalDate rentalDate = LocalDate.of(2021, 4, 8);
-        LocalDate returnDate = rentalDate.plusDays(7);
+        LocalDate returnDate = rentalDate.plusMonths(7);
         systemManager.getTreatmentManager().rentalMedicalDevice(ItemCode.ASSISTIVE_DEVICE, "휠체어", Payment.ACCOUNT, general, rentalDate, returnDate, quantity, 300_000);
-        // 요양비 청구
-        systemManager.getTreatmentManager().chargeMedicalTreatment("신한 123123-012312321", general);
-
-        // 의료기기 반납
+        systemManager.getTreatmentManager().insertMedicalTreatment(DiseaseCode.RESPIRATORY_DISEASE, ItemCode.ASSISTIVE_DEVICE, general);
+        systemManager.getTreatmentManager().insertMedicalTreatment(DiseaseCode.RESPIRATORY_DISEASE, ItemCode.ASSISTIVE_DEVICE, general);
         systemManager.getTreatmentManager().returnMedicalDevice(ItemCode.ASSISTIVE_DEVICE, "휠체어", general, quantity);
-        systemManager.getTreatmentManager().insertMedicalTreatment(DiseaseCode.RESPIRATORY_DISEASE, ItemCode.ASSISTIVE_DEVICE, general);
-        // 요양비 대상자 등록 오류
-        systemManager.getTreatmentManager().insertMedicalTreatment(DiseaseCode.RESPIRATORY_DISEASE, ItemCode.ASSISTIVE_DEVICE, general);
+        systemManager.getTreatmentManager().chargeMedicalTreatment("신한 123123-012312321", general);
 
         // 내 요양비 목록 조회
 //        systemManager.getTreatmentManager().showMedicalTreatmentsByGeneral(general);

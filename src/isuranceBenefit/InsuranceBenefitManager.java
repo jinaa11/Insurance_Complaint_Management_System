@@ -60,10 +60,13 @@ public class InsuranceBenefitManager {
     }
 
     public void showMedicalDevices() {
-        for (MedicalDevice medicalDevice : medicalDevices) {
-            medicalDevice.showMedicalDevice();
-            System.out.println("===================");
-        }
+        medicalDevices.stream().forEach(m -> {
+            m.showMedicalDevice();
+        });
+//        for (MedicalDevice medicalDevice : medicalDevices) {
+//            medicalDevice.showMedicalDevice();
+//            System.out.println("===================");
+//        }
     }
 
     public void showMedicalCareStatustics(LocalDate startDate, LocalDate endDate, MedicalTreatmentManager manager) {
@@ -71,6 +74,7 @@ public class InsuranceBenefitManager {
 
         for (MedicalTreatment treatment : treatments) {
             if (treatment.getReturnDate() != null && treatment.getReturnDate().isAfter(startDate) && treatment.getReturnDate().isBefore(endDate)) {
+
                 treatment.showMedicalTreatment();
             }
         }

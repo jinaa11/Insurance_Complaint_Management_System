@@ -76,9 +76,10 @@ public class SystemManager {
         System.out.println("로그인이 완료되었습니다.");
     }
 
+    // 관리자
     public void login(String name, String phoneNumber, String password) throws Exception {
         User user = users.stream()
-                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber))
+                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber) && u instanceof Admin && ((Admin) u).getPassword().equals(password))
                 .findFirst()
                 .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));
         if (user instanceof Admin && !((Admin) user).getPassword().equals(password)) {
