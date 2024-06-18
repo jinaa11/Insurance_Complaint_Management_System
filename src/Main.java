@@ -116,8 +116,7 @@ public class Main {
         System.out.println("\t 현수진 건강보험 민원 관리자 시스템");
         System.out.println("========================================\n");
         System.out.println("\t1. 보험급여 관리");
-        System.out.println("\t2. 요양비 관련 서비스");
-        System.out.println("\t3. 로그아웃\n");
+        System.out.println("\t2. 로그아웃\n");
         System.out.println("========================================");
         System.out.print("[번호 입력]: ");
         String menu = bf.readLine();
@@ -127,9 +126,6 @@ public class Main {
                 manageInsuranceBenefits(manager);
                 break;
             case "2":
-
-                break;
-            case "3":
                 System.out.println("\n 로그아웃 합니다.");
                 manager.logout();
                 break;
@@ -157,9 +153,12 @@ public class Main {
                 manager.getBenefitManager().showMedicalCareStatustics(startDate, endDate, manager.getTreatmentManager());
                 break;
             case "2":
-
+                manager.getTreatmentManager().showCurrentlyBenefitUsers();  // 요양비 매니저 -> 요양비 대상자 조회
                 break;
             case "3":
+                manager.getBenefitManager().showMedicalDevices();  // 보험료 매니저 -> 의료기기 관리
+                break;
+            case "4":
                 System.out.println("\n 로그아웃 합니다.");
                 manager.logout();
                 break;
