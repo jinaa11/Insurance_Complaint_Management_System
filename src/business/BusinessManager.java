@@ -3,10 +3,10 @@ package business;
 import common.Payment;
 import common.SystemManager;
 import general.WorkInfo;
+import user.Business;
 import user.General;
 import user.User;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,42 +28,6 @@ public class BusinessManager {
     this.employees = employees;
     this.deleteEmployees = deleteEmployees;
   }
-
-  // 사업장 직원 목록 조회
-  public void showEmployees() {
-    for (General employee : employees) {
-      employee.showBusinessEmployees();
-      System.out.println("===============================");
-    }
-  }
-
-  public void setBusiness(Business business) {
-    this.business = business;
-  }
-
-  // 사업장 직원 등록
-  public void addEmployee(SystemManager manager) throws Exception {
-    System.out.println("============ 직원 등록 ============");
-    System.out.println("직원 정보를 입력하세요.");
-
-    System.out.print("이름: ");
-    String name = sc.nextLine();
-    if (name.isEmpty()) {
-      System.out.println("이름은 필수 입력 항목입니다.");
-      return;
-    }
-
-    System.out.print("생년월일 (YYYY-MM-DD): ");
-    String birth = sc.nextLine().trim();
-    if(birth.isEmpty()) {
-      System.out.println("생년월일은 필수 입력 항목입니다.");
-      
-    }
-
-    public BusinessManager(LinkedList<General> employees, LinkedList<General> deleteEmployees) {
-        this.employees = employees;
-        this.deleteEmployees = deleteEmployees;
-    }
 
     public void setBusiness(Business business) {
         this.business = business;

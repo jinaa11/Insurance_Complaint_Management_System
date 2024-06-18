@@ -1,21 +1,17 @@
-import business.Business;
+import isuranceBenefit.MedicalDevice;
+import user.Business;
 import common.Payment;
 import common.SystemManager;
 import data.BaseData;
 import isuranceBenefit.ItemCode;
-import isuranceBenefit.MedicalDevice;
 import medicaltreatment.DiseaseCode;
 import user.Admin;
 import user.General;
-import user.User;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
-import java.util.*;
-
-import static data.BaseData.genenrateMedicalDevices;
 
 public class Main {
 
@@ -54,7 +50,7 @@ public class Main {
         System.out.println("========================================");
         System.out.println("\t\t현수진 건강보험 민원 시스템");
         System.out.println("========================================");
-        System.out.println("\t1. 로그인");
+        System.out.println("\t1. 일반 사용자 로그인");
         System.out.println("\t2. 관리자 로그인");
         System.out.println("\t3. 사업장 로그인");
         System.out.println("\t4. 시스템 종료");
@@ -89,7 +85,7 @@ public class Main {
                 String businessPhoneNumber = bf.readLine();
                 System.out.print("비밀번호: ");
                 String businessPassword = bf.readLine();
-                manager.login(businessName, businessPhoneNumber, businessPassword);
+                manager.loginBusiness(businessName, businessPhoneNumber, businessPassword);
                 break;
             case "4":
                 System.out.println("\n 시스템을 종료합니다. 이용해주셔서 감사합니다.");
@@ -191,7 +187,7 @@ public class Main {
                     manager.getInsuranceManager().showDetailWorkInsurance((General) manager.getLoggedInUser());
                     break;
                 case "6":
-                    System.out.print("예상 월급을 입력해주세요");
+                    System.out.print("예상 월급을 입력해주세요: ");
                     long salary = Long.parseLong(bf.readLine());
                     manager.getInsuranceManager().calculateHealthInsurance(salary);
                 case "7":
@@ -264,10 +260,7 @@ public class Main {
                 case "6":
                     return;
             }
-
         }
-
-
     }
 
     private static void adminScreenLogic(SystemManager manager) throws IOException {
@@ -309,18 +302,60 @@ public class Main {
                 LocalDate startDate = LocalDate.parse(bf.readLine());
                 System.out.print("조회 종료일 입력(yyyy-MM-dd): ");
                 LocalDate endDate = LocalDate.parse(bf.readLine());
-                manager.getBenefitManager().showMedicalCareStatustics(startDate, endDate, manager.getTreatmentManager());
+                manager.getTreatmentManager().showMedicalCareStatustics(startDate, endDate);
                 break;
             case "2":
                 manager.getTreatmentManager().showCurrentlyBenefitUsers();  // 요양비 매니저 -> 요양비 대상자 조회
                 break;
             case "3":
-                manager.getBenefitManager().showMedicalDevices();  // 보험료 매니저 -> 의료기기 관리
+                try {
+                    deviceHandle(manager);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
                 break;
             case "4":
                 System.out.println("\n 로그아웃 합니다.");
                 manager.logout();
                 break;
+        }
+    }
+
+    private static void deviceHandle(SystemManager manager) throws Exception {
+        while (true) {
+            System.out.println("========================================");
+            System.out.println("\t 현수진 건강보험 민원 관리자 시스템");
+            System.out.println("========================================\n");
+            System.out.println("\t1. 의료기기 등록");
+            System.out.println("\t2. 의료기기 목록 조회");
+            System.out.println("\t3. 의료기기 삭제");
+            System.out.println("\t4. 뒤로가기\n");
+            System.out.println("========================================");
+            System.out.print("[번호 입력]: ");
+            String menu = bf.readLine();
+            switch (menu) {
+                case "1":
+                    System.out.print("의료기기 코드 입력: ");
+                    ItemCode itemCode = ItemCode.getCode(bf.readLine());
+                    System.out.print("의료기기 이름 입력: ");
+                    String name = bf.readLine();
+                    System.out.print("의료기기 수량 입력: ");
+                    long quantity = Long.parseLong(bf.readLine());
+                    manager.getBenefitManager().addDevice(new MedicalDevice(itemCode, name, quantity));
+                    break;
+                case "2":
+                    manager.getBenefitManager().showDevices();
+                    break;
+                case "3":
+                    System.out.print("의료기기 코드 입력: ");
+                    ItemCode deleteCode = ItemCode.getCode(bf.readLine());
+                    System.out.print("의료기기 이름 입력: ");
+                    String deleteName = bf.readLine();
+                    manager.getBenefitManager().deleteDevice(deleteCode, deleteName);
+                    break;
+                case "4":
+                    return;
+            }
         }
     }
 

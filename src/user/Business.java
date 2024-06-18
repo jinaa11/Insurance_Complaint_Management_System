@@ -1,6 +1,4 @@
-package business;
-
-import user.User;
+package user;
 
 public class Business extends User{
   private long bid;
@@ -31,4 +29,8 @@ public class Business extends User{
   public void setBname(String bname) {
     this.bname = bname;
   }
+
+    public String getPassword() {
+        return password;
+    }
 }

@@ -1,9 +1,8 @@
 package common;
 
-import business.Business;
+import user.Business;
 import business.BusinessManager;
 import general.InsuranceManager;
-import general.Qualification;
 import general.QualificationManager;
 import isuranceBenefit.InsuranceBenefitManager;
 import medicaltreatment.MedicalTreatmentManager;
@@ -82,7 +81,22 @@ public class SystemManager {
     // 관리자
     public void login(String name, String phoneNumber, String password) throws Exception {
         User user = users.stream()
-                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber) && u instanceof Admin && ((Admin) u).getPassword().equals(password))
+                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber)
+                        && u instanceof Admin && ((Admin) u).getPassword().equals(password))
+                .findFirst()
+                .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));
+        if (user instanceof Admin && !((Admin) user).getPassword().equals(password)) {
+            throw new Exception("비밀번호가 일치하지 않습니다.");
+        } else {
+            this.loggedInUser = user;
+        }
+        System.out.println("로그인이 완료되었습니다.");
+    }
+
+    // 사업장
+    public void loginBusiness(String name, String phoneNumber, String password) throws Exception {
+        User user = users.stream()
+                .filter(u -> u.getName().equals(name) && u.getPhoneNumber().equals(phoneNumber) && u instanceof Business && ((Business) u).getPassword().equals(password))
                 .findFirst()
                 .orElseThrow(() -> new Exception("존재하지 않는 사용자입니다."));
         if (user instanceof Admin && !((Admin) user).getPassword().equals(password)) {

@@ -105,13 +105,13 @@ public class InsuranceManager {
     }
 
     // 자동이체 보험료 납부
-    public void autoPay(String bankName, String accountNo, General general) throws Exception {
+    public void autoPay(String bankName, String account, General general) throws Exception {
         InsuranceBenefit recentBenefit = insuranceBenefits.stream()
                 .filter(ift -> ift.getGeneral().equals(general))
                 .max(Comparator.comparing(InsuranceBenefit::getCreateDate))
                 .orElseThrow(() -> new Exception("보험료 내역이 존재하지 않습니다."));
-        if (isValidAccountNumber(accountNo)) {
-            recentBenefit.setPaymentSource(bankName + " " + accountNo);
+        if (isValidAccountNumber(account)) {
+            recentBenefit.setPaymentSource(bankName + " " + account);
             recentBenefit.setIsPaid(true);
         } else {
             System.out.println("유효하지 않은 카드 일련번호입니다. 다시 입력해주세요.");
@@ -120,15 +120,15 @@ public class InsuranceManager {
     }
 
     // 건강 보험료 계산기
-    public void calculateHealthInsurance(double monthlySalary) {
-        long healthInsurancePremium = (long) (monthlySalary * (7.09 / 100) / 2); // 1. 건강
-        double longTermCareInsurancePremium = healthInsurancePremium * (0.9182 / 100 * 7.09 / 100); // 2. 장기
-        long result = (long) (healthInsurancePremium + longTermCareInsurancePremium);// 납부금액
+    public void calculateHealthInsurance(long salary) {
+        long healthInsurancePremium = (long) (salary * 0.0709 * 0.5); // 1. 건강
+        long longTermCareInsurancePremium = (long) (healthInsurancePremium * (0.009182 / 0.0709)); // 2. 장기
+        long result = healthInsurancePremium + longTermCareInsurancePremium;// 납부금액
         System.out.println("===============보험료 계산기===============");
-        System.out.println("월급여: " + (long) monthlySalary + "원");
-        System.out.println("건강보험료: " + healthInsurancePremium + "원");
-        System.out.println("장기요양보험료: " + (long) longTermCareInsurancePremium + "원");
-        System.out.println("총 납부 금액: " + result + "원");
+        System.out.println("월급여: " + String.format("%,d원", (long) salary));
+        System.out.println("건강보험료: " + String.format("%,d원", healthInsurancePremium));
+        System.out.println("장기요양보험료: " + String.format("%,d원", (long) longTermCareInsurancePremium));
+        System.out.println("총 납부 금액: " + String.format("%,d원", result));
         System.out.println("=========================================");
     }
 

@@ -23,7 +23,6 @@ public class Qualification {
     // 자격 사항 요약 확인 조회
     public void show() {
         String relationship = general.getWorkInfo() == null ? "직장피부양자" : "직장가입자";
-
         System.out.println("가입자 구분 : " + relationship);
         System.out.println("가입자 이름 : " + general.getName());
         System.out.println("취득일 : " + acquireDate);
@@ -31,14 +30,14 @@ public class Qualification {
     }
 
     // 자격 상세 확인서 조회
-    public void showDetail(long bid) {
+    public void showDetail(String bname) {
         String relationship = general.getWorkInfo() == null ? "직장피부양자" : "직장가입자";
         System.out.println("< 조회 >");
         System.out.println("주민등록번호 : " + general.getResidentNumber());
         System.out.println();
         System.out.println("< 조회결과 >" + "\t" + general.getName());
         System.out.println("건강보험증번호 : " + general.getInsuranceNumber());
-        System.out.println("사업장명 : " + bid + "\n" + "가입자 구분 : " +  relationship);
+        System.out.println("사업장명 : " + bname + "\n" + "가입자 구분 : " +  relationship);
         if (lossDate == null) {
             System.out.println("자격 상태 : 현자격");
         }

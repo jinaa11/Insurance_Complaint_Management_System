@@ -102,10 +102,18 @@ public class MedicalTreatment {
         String rentalDate = sdf.format(Date.from(this.rentalDate.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant()));
         String returnDate = sdf.format(Date.from(this.returnDate.atStartOfDay().atZone(java.time.ZoneId.systemDefault()).toInstant()));
 
+        String accountNo;
+        if (this.account != null) {
+            accountNo = this.account + "\t\t";
+        } else {
+            accountNo = " " + "\t\t\t\t\t\t";
+        }
+
         System.out.println("|" + this.id + "\t" + this.process.getValue() + "\t" + this.diseaseCode.getValue() + "\t" +
                 maskedResidentNumber + "\t" + this.general.getName() + "\t" +
-                formatAmount + "\t" + this.account + "\t" + this.device.getDeviceName() + "\t\t" +
+                formatAmount + "\t" + accountNo + this.device.getDeviceName() + "\t\t" +
                 rentalDate + "\t" + returnDate + "\t" + this.createDate + "|");
+
     }
 
     public boolean isPeriodOverlap(LocalDate rentalDate, LocalDate returnDate) {

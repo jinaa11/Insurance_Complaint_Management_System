@@ -36,22 +36,18 @@ public class MedicalTreatmentManager {
         return instance;
     }
 
-    public List<MedicalTreatment> getMedicalTreatments() {
-        return medicalTreatments;
-    }
-
     public void showMedicalTreatmentsByGeneral(General general) {
-        System.out.println("===============================================================================================================================");
-        System.out.println("|No\t처리상태\t질병분류\t수진자주민번호\t\t수진자명\t환급금액\t\t환급수단\t\t\t\t\t의료기기명\t대여일\t\t반납일\t\t등록일\t  |");
-        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+        System.out.println("=================================================================================================================================================");
+        System.out.println("|No\t처리상태\t질병분류\t수진자주민번호\t\t수진자명\t환급금액\t\t환급수단\t\t\t\t\t의료기기명\t대여일\t\t반납일\t\t등록일\t\t\t\t\t\t|");
+        System.out.println("ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
         List<MedicalTreatment> treatments = medicalTreatments.stream()
-            .filter(m -> m.getGeneral().equals(general))
-            .collect(Collectors.toList());
+                .filter(m -> m.getGeneral().equals(general))
+                .collect(Collectors.toList());
 
         for (MedicalTreatment treatment : treatments) {
             treatment.showMedicalTreatment();
         }
-        System.out.println("===============================================================================================================================");
+        System.out.println("=================================================================================================================================================");
     }
 
     public void insertMedicalTreatment(DiseaseCode code, ItemCode itemCode, General general) {
@@ -68,9 +64,10 @@ public class MedicalTreatmentManager {
         System.out.println("요양비 대상자 등록이 완료 되었습니다.\n");
     }
 
-    public void rentalMedicalDevice(ItemCode itemCode, String deviceName, Payment payment, General general, LocalDate rentalDate, LocalDate returnDate, long quantity, long amount) {
+    public void rentalMedicalDevice(ItemCode itemCode, String deviceName, Payment payment, General general,
+                                    LocalDate rentalDate, LocalDate returnDate, long quantity, long amount) {
         try {
-            MedicalDevice device = insuranceBenefitManager.searchMedicalDevice(itemCode, deviceName);
+            MedicalDevice device = insuranceBenefitManager.findMedicalDevice(itemCode, deviceName);
             MedicalTreatment medicalTreatment = medicalTreatments.stream()
                 .sorted(Comparator.comparing(MedicalTreatment::getCreateDate, Comparator.reverseOrder()))
                 .filter(m -> m.getGeneral().getResidentNumber().equals(general.getResidentNumber()))
@@ -99,7 +96,7 @@ public class MedicalTreatmentManager {
 
     public void returnMedicalDevice(ItemCode itemCode, String deviceName, General general, long quantity) {
         try {
-            MedicalDevice device = insuranceBenefitManager.searchMedicalDevice(itemCode, deviceName);
+            MedicalDevice device = insuranceBenefitManager.findMedicalDevice(itemCode, deviceName);
             MedicalTreatment medicalTreatment = medicalTreatments.stream()
                 .sorted(Comparator.comparing(MedicalTreatment::getCreateDate, Comparator.reverseOrder()))
                 .filter(m -> m.getGeneral().getResidentNumber().equals(general.getResidentNumber()))
@@ -131,6 +128,12 @@ public class MedicalTreatmentManager {
     }
 
     public void showCurrentlyBenefitUsers() {
+        List<MedicalTreatment> medicalTreatments = new ArrayList<>();
+        for (General general : currentlyBenefitUsers) {
+            medicalTreatments.addAll(this.medicalTreatments.stream()
+                .filter(m -> m.getGeneral().equals(general))
+                .collect(Collectors.toList()));
+        }
         System.out.println("================================================================");
         System.out.println("|건강보험증번호\t수진자명\t\t  품목코드\t\t의료기기명\t대여일\t   반납일\t|");
         medicalTreatments.forEach(mt -> {
@@ -142,21 +145,14 @@ public class MedicalTreatmentManager {
             System.out.println(" " + mt.getReturnDate());
         });
         System.out.println();
-
-//        for (MedicalTreatment medicalTreatment : medicalTreatments) {
-//            if (medicalTreatment.getProcess().equals(Process.WAIT) || medicalTreatment.getProcess().equals(Process.PROCESS)) {
-//                System.out.println(medicalTreatment.getGeneral().getInsuranceNumber() + "\t" +
-//                        medicalTreatment.getGeneral().getName() + "\t" +
-//                        medicalTreatment.getDevice().getItemCode() + "\t" +
-//                        medicalTreatment.getDevice().getDeviceName() + "\t" +
-//                        medicalTreatment.getRentalDate() + "\t" + medicalTreatment.getReturnDate());
-//            }
-//        }
     }
 
-    /**
-     * 추가 필요 로직
-     * 1. 매일 대여기간이 끝나는지 체크. 반납 안되었다면, 알림 발송
-     *
-     * */
+    public void showMedicalCareStatustics(LocalDate startDate, LocalDate endDate) {
+        for (MedicalTreatment treatment : this.medicalTreatments) {
+            if (treatment.getReturnDate() != null && treatment.getReturnDate().isAfter(startDate) && treatment.getReturnDate().isBefore(endDate)) {
+
+                treatment.showMedicalTreatment();
+            }
+        }
+    }
 }

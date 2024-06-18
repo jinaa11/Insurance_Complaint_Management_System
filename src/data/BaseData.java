@@ -1,6 +1,6 @@
 package data;
 
-import business.Business;
+import user.Business;
 import common.Payment;
 import common.SystemManager;
 import general.Qualification;
@@ -25,12 +25,12 @@ public class BaseData {
                 // Admin 객체 생성
                 new Admin("관리자1", "1980-05-01", "010-1234-5678", "850101-1234567", "admin123"),
                 new Admin("관리자2", "1982-07-15", "010-8765-4321", "820715-7654321", "adminpass456"),
-//                new Admin("이수호", "1998-03-03", "010-7720-7850", "980303-7654321", "admin"),
-                new Admin("1", "1998-03-03", "2", "980303-7654321", "3"),
+                new Admin("이수호", "1998-03-03", "010-7720-7850", "980303-7654321", "admin"),
+//                new Admin("1", "1998-03-03", "2", "980303-7654321", "3"),
 
                 // Business 객체 생성
                 // public Business(String name, String birth, String phoneNumber, String residentNumber, long bid, String bname) {
-                new Business("사업장1", "980303", "010-1234-1234", "9803031234567", 1001, "현수진기업", "1234"),
+                new Business("김진아", "980303", "010-1234-1234", "9803031234567", 1001, "현수진기업", "1234"),
                 new Business("사업장2", "970302", "010-5465-2432", "9703026342346", 1002, "테크맥", "1234"),
                 new Business("사업장3", "990301", "010-1234-1233", "9903011234567", 1003, "빅빅빅빅빅", "1234"),
                 new Business("사업장4", "990301", "010-1234-1233", "9903011234567", 1004, "카카오", "1234"),
@@ -41,16 +41,16 @@ public class BaseData {
                 //  public General(String name, String birth, String phoneNumber, String residentNumber, long insuranceNumber,
                 //  long payerNumber, String bname, String acquireDate, String lossDate, WorkInfo workInfo, Long salary) {
                 //
-                new General("김현민", "1990-01-01", "010-1111-2222", "900101-1234567", 123123012, 1283712893, "2020-01-01", "2023-01-01", new WorkInfo(1001, "사원", "현수진기업"), 3_200_000L),
-                new General("김진아", "1992-02-02", "010-3333-4444", "920202-2345678", 123123012, 218736129, "2020-02-02", "2023-02-02"),
-                new General("이수호", "1993-02-03", "010-2222-4444", "930203-1234567", 123123012, 213762173, "2020-02-03", "2023-02-03"),
-                new General("김지영", "1989-01-16",	"010-3333-5555", "890116-1234567"	,123123012,	3450324, "2020-01-16", "2023-01-16", new WorkInfo(1004, "부장", "카카오"), 4_320_000L),
-                new General("박민수", "1996-05-27",	"010-4444-6666", "960527-2345678"	,123123012,	4095349, "2020-05-27", "2023-05-27", new WorkInfo(1002, "대리", "테크맥"), 5_000_000L),
-                new General("최영희", "1990-07-10",	"010-5555-7777", "900710-1234567"	,123123012,	324823792, "2020-07-10", "2023-07-10", new WorkInfo(1003, "과장", "자바굳"), 6_000_000L)
+                new General("김현민", "1990-01-01", "010-1111-2222", "900101-1234567", 123123012, 1283712893, new WorkInfo(1001, "사원", "현수진기업"), 3_200_000L),
+                new General("김진아", "1992-02-02", "010-3333-4444", "920202-2345678", 123123012, 218736129),
+                new General("이수호", "1993-02-03", "010-2222-4444", "930203-1234567", 123123012, 213762173),
+                new General("김지영", "1989-01-16",	"010-3333-5555", "890116-1234567"	,123123012,	3450324, new WorkInfo(1004, "부장", "카카오"), 4_320_000L),
+                new General("박민수", "1996-05-27",	"010-4444-6666", "960527-2345678"	,123123012,	4095349, new WorkInfo(1002, "대리", "테크맥"), 5_000_000L),
+                new General("최영희", "1990-07-10",	"010-5555-7777", "900710-1234567"	,123123012,	324823792, new WorkInfo(1003, "과장", "자바굳"), 6_000_000L)
         );
         ((General) users.get(9)).setWorkInfo(new WorkInfo( 1001, "사원", "현수진기업"));
-        ((General) users.get(10)).setWorkInfo(new WorkInfo( 1002, "대리", "테크맥"));
-        ((General) users.get(11)).setWorkInfo(new WorkInfo( 1003, "과장", "네이버"));
+//        ((General) users.get(10)).setWorkInfo(new WorkInfo( 1002, "대리", "테크맥"));
+//        ((General) users.get(11)).setWorkInfo(new WorkInfo( 1003, "과장", "네이버"));
         ((General) users.get(12)).setWorkInfo(new WorkInfo( 1004, "부장", "카카오"));
 
         manager.addUsers(users);
@@ -85,7 +85,7 @@ public class BaseData {
         General general = (General) systemManager.getUsers().get(9);
         // 더미 의료기기 목록 등록
         List<MedicalDevice> medicalDevices = genenrateMedicalDevices();
-        systemManager.getBenefitManager().addMedicalDevices(medicalDevices);
+        systemManager.getBenefitManager().addDevices(medicalDevices);
 
         // 요양비 대상자 등록
         systemManager.getTreatmentManager().insertMedicalTreatment(DiseaseCode.RESPIRATORY_DISEASE, ItemCode.ASSISTIVE_DEVICE, general);
@@ -130,7 +130,7 @@ public class BaseData {
         List<Qualification> qualifications = new ArrayList<>();
         Qualification qualification1 = new Qualification((General) users.get(9), LocalDate.of(2023, 1, 1), null, "현수진기업");
         Qualification qualification2 = new Qualification((General) users.get(10), LocalDate.of(2010, 12, 12), LocalDate.of(2023, 1, 1), "테크맥");
-        Qualification qualification3 = new Qualification((General) users.get(11), LocalDate.of(2000, 5, 2), LocalDate.of(2005, 3, 8), "네이버");
+        Qualification qualification3 = new Qualification((General) users.get(11), LocalDate.of(2000, 5, 2), LocalDate.of(2010, 12, 12), "네이버");
         qualifications.add(qualification1);
         qualifications.add(qualification2);
         qualifications.add(qualification3);
