@@ -5,27 +5,17 @@ import user.User;
 public class Business extends User{
   private long bid;
   private String bname;
+  private String password;
 
   public Business() {}
 
-  public Business(String name, String birth, String phoneNumber, String residentNumber, long bid, String bname) {
+  public Business(String name, String birth, String phoneNumber, String residentNumber, long bid, String bname, String password) {
     super(name, birth, phoneNumber, residentNumber);
     this.bid = bid;
     this.bname = bname;
+    this.password = password;
   }
 
-  public void show() {
-    System.out.println("사업장 번호: " + bid);
-    System.out.println("사업장명: " + bname);
-  }
-
-  public void searchBusiness(long bid) {
-    
-  }
-
-  public void save(String actionNo, long pid, String relationship, String bname, String acquire, String lossDate) {
-
-  }
   public long getBid() {
     return bid;
   }

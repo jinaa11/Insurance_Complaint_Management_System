@@ -39,7 +39,8 @@ public class Main {
                     Admin admin = (Admin) systemManager.getLoggedInUser();
                     adminScreenLogic(systemManager);
                 } else if (systemManager.getLoggedInUser() instanceof Business) {
-
+                    Business business = (Business) systemManager.getLoggedInUser();
+                    businessScreenLogic(systemManager);
                 } else {
                     welcomeScreenLogic(systemManager);
                 }
@@ -55,7 +56,8 @@ public class Main {
         System.out.println("========================================");
         System.out.println("\t1. 로그인");
         System.out.println("\t2. 관리자 로그인");
-        System.out.println("\t3. 시스템 종료");
+        System.out.println("\t3. 사업장 로그인");
+        System.out.println("\t4. 시스템 종료");
         System.out.println("========================================");
         System.out.print("[번호 입력]: ");
         String menu = bf.readLine();
@@ -80,6 +82,16 @@ public class Main {
                 manager.login(adminName, adminPhoneNumber, password);
                 break;
             case "3":
+                System.out.println("\n[사업장 로그인]");
+                System.out.print("이름: ");
+                String businessName = bf.readLine();
+                System.out.print("번호: ");
+                String businessPhoneNumber = bf.readLine();
+                System.out.print("비밀번호: ");
+                String businessPassword = bf.readLine();
+                manager.login(businessName, businessPhoneNumber, businessPassword);
+                break;
+            case "4":
                 System.out.println("\n 시스템을 종료합니다. 이용해주셔서 감사합니다.");
                 System.exit(0);
         }
@@ -189,6 +201,65 @@ public class Main {
                     break;
                 case "4":
                     return;
+            }
+        }
+    }
+
+    private static void businessScreenLogic(SystemManager manager) throws IOException {
+        while (true) {
+            System.out.println("========================================");
+            System.out.println("\t 현수진 건강보험 민원 관리자 시스템");
+            System.out.println("========================================\n");
+            System.out.println("\t1. 사업장 직원 등록");
+            System.out.println("\t2. 사업장 직원 목록 조회");
+            System.out.println("\t3. 사업장 직원 삭제");
+            System.out.println("\t4. 보험료 납부 현황 조회 ");
+            System.out.println("\t5. 보험료 납부");
+            System.out.println("\t6. 결제 수단 변경");
+            System.out.println("\t7. 로그아웃\n");
+            System.out.println("========================================");
+            System.out.print("[번호 입력]: ");
+            String menu = bf.readLine();
+
+            switch (menu) {
+                case "1":
+                    try {
+                        manager.getBusinessManager().addEmployee(manager);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "2":
+                    manager.getBusinessManager().showEmployees();
+                    break;
+                case "3":
+                    try {
+                        manager.getBusinessManager().deleteEmployee();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "4":
+                    try {
+                        manager.getBusinessManager().showPaidInsurance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "5":
+                    manager.getBusinessManager().changePayment();
+                    break;
+                case "6":
+                    try {
+                        manager.getBusinessManager().payInsurance();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case "7":
+                    System.out.println("\n 로그아웃 합니다.");
+                    manager.logout();
+                    break;
             }
         }
     }
